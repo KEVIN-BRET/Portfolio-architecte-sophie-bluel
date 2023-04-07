@@ -36,6 +36,11 @@ function worksDisplay() {
     `
     )
     .join("");
+
+  boutonAfficherTout.classList.add("btn-clicked");
+  boutonAfficherObjets.classList.remove("btn-clicked");
+  boutonAfficherAppartements.classList.remove("btn-clicked");
+  boutonAfficherHotels.classList.remove("btn-clicked");
 }
 
 // Afficher les projets "Objets" :
@@ -47,13 +52,18 @@ function afficherObjets() {
     .map(
       (work) =>
         `
-      <figure>
+    <figure>
     <img src="${work.imageUrl}" alt="${work.title}">
     <figcaption>${work.title}</figcaption>
     </figure>
     `
     )
     .join("");
+
+  boutonAfficherTout.classList.remove("btn-clicked");
+  boutonAfficherObjets.classList.add("btn-clicked");
+  boutonAfficherAppartements.classList.remove("btn-clicked");
+  boutonAfficherHotels.classList.remove("btn-clicked");
 }
 
 // Afficher les projets "Appartements" :
@@ -72,6 +82,11 @@ function afficherAppartements() {
       `
     )
     .join("");
+
+  boutonAfficherTout.classList.remove("btn-clicked");
+  boutonAfficherObjets.classList.remove("btn-clicked");
+  boutonAfficherAppartements.classList.add("btn-clicked");
+  boutonAfficherHotels.classList.remove("btn-clicked");
 }
 
 // Afficher les projets "Hôtels & restaurents" :
@@ -83,13 +98,18 @@ function afficherHotels() {
     .map(
       (work) =>
         `
-        <figure>
-        <img src="${work.imageUrl}" alt="${work.title}">
-        <figcaption>${work.title}</figcaption>
-        </figure>
-        `
+    <figure>
+    <img src="${work.imageUrl}" alt="${work.title}">
+    <figcaption>${work.title}</figcaption>
+    </figure>
+    `
     )
     .join("");
+
+  boutonAfficherTout.classList.remove("btn-clicked");
+  boutonAfficherObjets.classList.remove("btn-clicked");
+  boutonAfficherAppartements.classList.remove("btn-clicked");
+  boutonAfficherHotels.classList.add("btn-clicked");
 }
 
 // ** Gestion des boutons de filtrage ** //
