@@ -11,7 +11,8 @@ const boutonAfficherHotels = document.querySelector(".btn-hotels");
 // variable qui va recevoir les données de l'api/works/
 let works = [];
 
-// fonction de récupération des données de l'api/works/
+// ** fonction de récupération des données de l'api/works/ ** //
+
 async function fetchWorks() {
   await fetch("http://localhost:5678/api/works")
     .then((response) => response.json())
@@ -22,26 +23,23 @@ async function fetchWorks() {
 
 // ** fonction pour afficher / filtrer les projets de la gallery :
 
-boutonAfficherTout.addEventListener("click", worksDisplay);
-
 // Afficher tous les projets :
 function worksDisplay() {
   gallery.innerHTML = works
     .map(
       (work) =>
         `
-        <figure>
-          <img src="${work.imageUrl}" alt="${work.title}">
-          <figcaption>${work.title}</figcaption>
-        </figure>
-      `
+    <figure>
+    <img src="${work.imageUrl}" alt="${work.title}">
+    <figcaption>${work.title}</figcaption>
+    </figure>
+    `
     )
     .join("");
 }
 
 // Afficher les projets "Objets" :
-
-boutonAfficherObjets.addEventListener("click", function () {
+function afficherObjets() {
   const projetsfiltree = works.filter(function (work) {
     return work.categoryId === 1;
   });
@@ -49,17 +47,17 @@ boutonAfficherObjets.addEventListener("click", function () {
     .map(
       (work) =>
         `
-    <figure>
+      <figure>
     <img src="${work.imageUrl}" alt="${work.title}">
     <figcaption>${work.title}</figcaption>
     </figure>
     `
     )
     .join("");
-});
+}
 
 // Afficher les projets "Appartements" :
-boutonAfficherAppartements.addEventListener("click", function () {
+function afficherAppartements() {
   const projetsfiltree = works.filter(function (work) {
     return work.categoryId === 2;
   });
@@ -67,17 +65,17 @@ boutonAfficherAppartements.addEventListener("click", function () {
     .map(
       (work) =>
         `
-    <figure>
-    <img src="${work.imageUrl}" alt="${work.title}">
-    <figcaption>${work.title}</figcaption>
-    </figure>
-    `
+      <figure>
+      <img src="${work.imageUrl}" alt="${work.title}">
+      <figcaption>${work.title}</figcaption>
+      </figure>
+      `
     )
     .join("");
-});
+}
 
 // Afficher les projets "Hôtels & restaurents" :
-boutonAfficherHotels.addEventListener("click", function () {
+function afficherHotels() {
   const projetsfiltree = works.filter(function (work) {
     return work.categoryId === 3;
   });
@@ -85,16 +83,21 @@ boutonAfficherHotels.addEventListener("click", function () {
     .map(
       (work) =>
         `
-    <figure>
-    <img src="${work.imageUrl}" alt="${work.title}">
-    <figcaption>${work.title}</figcaption>
-    </figure>
-    `
+        <figure>
+        <img src="${work.imageUrl}" alt="${work.title}">
+        <figcaption>${work.title}</figcaption>
+        </figure>
+        `
     )
     .join("");
-});
+}
 
 // ** Gestion des boutons de filtrage ** //
+
+boutonAfficherTout.addEventListener("click", worksDisplay);
+boutonAfficherObjets.addEventListener("click", afficherObjets);
+boutonAfficherAppartements.addEventListener("click", afficherAppartements);
+boutonAfficherHotels.addEventListener("click", afficherHotels);
 
 // au chargement de la page, on afffiche tous les projets :
 window.addEventListener("load", fetchWorks);
