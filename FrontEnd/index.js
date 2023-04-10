@@ -1,11 +1,12 @@
 // on pointe la balise dans laquelle va s'afficher les "projets"
 const gallery = document.querySelector(".gallery");
+const filtres = document.querySelector(".filtres");
 
 //** Gestion des boutons de filtre **//
-const boutonAfficherTout = document.querySelector(".btn-all");
-const boutonAfficherObjets = document.querySelector(".btn-objets");
-const boutonAfficherAppartements = document.querySelector(".btn-appartements");
-const boutonAfficherHotels = document.querySelector(".btn-hotels");
+const boutonAfficherTout = document.querySelector(".btn-0");
+const boutonAfficherObjets = document.querySelector(".btn-1");
+const boutonAfficherAppartements = document.querySelector(".btn-2");
+const boutonAfficherHotels = document.querySelector(".btn-3");
 // console.log(boutonAfficherHotels);
 
 // ** fonction de récupération des données de l'api/works/ ** //
@@ -15,8 +16,35 @@ async function fetchWorks() {
     .then((response) => response.json())
     .then((data) => (works = data));
   // console.log(works);
-  worksDisplay();
+  afficherProjets();
 }
+
+async function fetchCategories() {
+  await fetch("http://localhost:5678/api/categories")
+    .then((response) => response.json())
+    .then((data) => (categories = data));
+  // console.log(works);
+  afficherBoutonsFiltres();
+}
+
+function afficherBoutonsFiltres() {
+  document.querySelector(".filtres").innerHTML += `
+        <button class="btn btn-0" id="btn-0">
+          Tous
+      `;
+
+  for (let i = 0; i < categories.length; i++) {
+    const nomCategorie = categories[i].name;
+    const idCategorie = categories[i].id;
+
+    document.querySelector(".filtres").innerHTML += `
+        <button class="btn btn-${idCategorie}" id="btn-${idCategorie}">
+          ${nomCategorie}
+      `;
+  }
+}
+
+window.addEventListener("load", fetchCategories);
 
 // ** fonction pour afficher / filtrer les projets de la gallery :
 
@@ -29,7 +57,7 @@ function boutonFiltreActif(bouton) {
 }
 
 // Afficher tous les projets :
-function worksDisplay() {
+function afficherProjets() {
   gallery.innerHTML = works
     .map(
       (work) =>
@@ -103,10 +131,11 @@ function afficherHotels() {
 
 // ** Gestion des boutons de filtrage ** //
 
-boutonAfficherTout.addEventListener("click", worksDisplay);
-boutonAfficherObjets.addEventListener("click", afficherObjets);
-boutonAfficherAppartements.addEventListener("click", afficherAppartements);
-boutonAfficherHotels.addEventListener("click", afficherHotels);
+// boutonAfficherTout.addEventListener("click", afficherProjets);
+// boutonAfficherObjets.addEventListener("click", afficherObjets);
+// boutonAfficherAppartements.addEventListener("click", afficherAppartements);
+// boutonAfficherHotels.addEventListener("click", afficherHotels);
 
 // au chargement de la page, on afffiche tous les projets :
+// window.addEventListener("load", fetchCategories);
 window.addEventListener("load", fetchWorks);
