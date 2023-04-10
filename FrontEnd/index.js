@@ -8,9 +8,6 @@ const boutonAfficherAppartements = document.querySelector(".btn-appartements");
 const boutonAfficherHotels = document.querySelector(".btn-hotels");
 // console.log(boutonAfficherHotels);
 
-// variable qui va recevoir les données de l'api/works/
-let works = [];
-
 // ** fonction de récupération des données de l'api/works/ ** //
 
 async function fetchWorks() {
@@ -22,6 +19,14 @@ async function fetchWorks() {
 }
 
 // ** fonction pour afficher / filtrer les projets de la gallery :
+
+// fonction pour changer le style du bouton de filtre actif :
+function boutonFiltreActif(bouton) {
+  document.querySelectorAll(".btn-clicked").forEach((btn) => {
+    btn.classList.remove("btn-clicked");
+  });
+  bouton.classList.add("btn-clicked");
+}
 
 // Afficher tous les projets :
 function worksDisplay() {
@@ -36,11 +41,7 @@ function worksDisplay() {
     `
     )
     .join("");
-
-  boutonAfficherTout.classList.add("btn-clicked");
-  boutonAfficherObjets.classList.remove("btn-clicked");
-  boutonAfficherAppartements.classList.remove("btn-clicked");
-  boutonAfficherHotels.classList.remove("btn-clicked");
+  boutonFiltreActif(boutonAfficherTout);
 }
 
 // Afficher les projets "Objets" :
@@ -59,11 +60,7 @@ function afficherObjets() {
     `
     )
     .join("");
-
-  boutonAfficherTout.classList.remove("btn-clicked");
-  boutonAfficherObjets.classList.add("btn-clicked");
-  boutonAfficherAppartements.classList.remove("btn-clicked");
-  boutonAfficherHotels.classList.remove("btn-clicked");
+  boutonFiltreActif(boutonAfficherObjets);
 }
 
 // Afficher les projets "Appartements" :
@@ -82,11 +79,7 @@ function afficherAppartements() {
       `
     )
     .join("");
-
-  boutonAfficherTout.classList.remove("btn-clicked");
-  boutonAfficherObjets.classList.remove("btn-clicked");
-  boutonAfficherAppartements.classList.add("btn-clicked");
-  boutonAfficherHotels.classList.remove("btn-clicked");
+  boutonFiltreActif(boutonAfficherAppartements);
 }
 
 // Afficher les projets "Hôtels & restaurents" :
@@ -105,11 +98,7 @@ function afficherHotels() {
     `
     )
     .join("");
-
-  boutonAfficherTout.classList.remove("btn-clicked");
-  boutonAfficherObjets.classList.remove("btn-clicked");
-  boutonAfficherAppartements.classList.remove("btn-clicked");
-  boutonAfficherHotels.classList.add("btn-clicked");
+  boutonFiltreActif(boutonAfficherHotels);
 }
 
 // ** Gestion des boutons de filtrage ** //
