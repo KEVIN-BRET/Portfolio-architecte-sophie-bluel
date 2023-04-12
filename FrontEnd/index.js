@@ -1,52 +1,105 @@
-// on pointe la balise dans laquelle va s'afficher les "projets"
-const gallery = document.querySelector(".gallery");
+// on pointe la balise dans laquelle vont s'afficher les "filtres"
 const filtres = document.querySelector(".filtres");
+// on pointe la balise dans laquelle vont s'afficher les "projets"
+const gallery = document.querySelector(".gallery");
 
-//** Gestion des boutons de filtre **//
-const boutonAfficherTout = document.querySelector(".btn-0");
-const boutonAfficherObjets = document.querySelector(".btn-1");
-const boutonAfficherAppartements = document.querySelector(".btn-2");
-const boutonAfficherHotels = document.querySelector(".btn-3");
-// console.log(boutonAfficherHotels);
-
-// ** fonction de récupération des données de l'api/works/ ** //
-
+// On récupère les données de l'api/works/
 async function fetchWorks() {
   await fetch("http://localhost:5678/api/works")
     .then((response) => response.json())
     .then((data) => (works = data));
   // console.log(works);
+
+  // on affiche les catégories
+  fetchCategories();
+
+  // on affiche les projets
   afficherProjets();
 }
 
+// On récupère les données de l'api/categories/
 async function fetchCategories() {
   await fetch("http://localhost:5678/api/categories")
     .then((response) => response.json())
     .then((data) => (categories = data));
-  // console.log(works);
+  //   console.log(categories);
+
+  // On affiche les boutons de filtres
   afficherBoutonsFiltres();
 }
 
 function afficherBoutonsFiltres() {
-  document.querySelector(".filtres").innerHTML += `
-        <button class="btn btn-0" id="btn-0">
-          Tous
-      `;
+  // Création du bouton de filtrage "Tous" :
+  const boutonFilterTout = document.createElement("button");
+  boutonFilterTout.innerText = `Tous`;
+  boutonFilterTout.className = "btn btn-0";
 
+  filtres.appendChild(boutonFilterTout);
+
+  boutonFilterTout.addEventListener("click", () => afficherProjets());
+
+  // Création des boutons de filtrage avec les catégoris récupérée par l'api :
   for (let i = 0; i < categories.length; i++) {
     const nomCategorie = categories[i].name;
     const idCategorie = categories[i].id;
 
-    document.querySelector(".filtres").innerHTML += `
-        <button class="btn btn-${idCategorie}" id="btn-${idCategorie}">
-          ${nomCategorie}
-      `;
+    const boutonFiltrerCategories = document.createElement("button");
+    boutonFiltrerCategories.innerText = nomCategorie;
+    boutonFiltrerCategories.className = `btn btn-${idCategorie}`;
+
+    filtres.appendChild(boutonFiltrerCategories);
+
+    // boutonFiltrerCategories.addEventListener("click", () =>
+    //   console.log(nomCategorie)
+    // );
   }
 }
 
-window.addEventListener("load", fetchCategories);
-
 // ** fonction pour afficher / filtrer les projets de la gallery :
+
+// Afficher tous les projets :
+function afficherProjets() {
+  //   const gallery = document.querySelector(".gallery");
+
+  for (let i = 0; i < works.length; i++) {
+    // const projetId = works[i].id;
+    // const projetName = works[i].title;
+
+    const projetCard = document.createElement("figure");
+    gallery.appendChild(projetCard);
+
+    const projetImage = document.createElement("img");
+    projetImage.src = works[i].imageUrl;
+    projetImage.alt = works[i].title;
+    projetCard.appendChild(projetImage);
+
+    const projetSousTitre = document.createElement("figcaption");
+    projetSousTitre.innerText = works[i].title;
+    projetCard.appendChild(projetSousTitre);
+  }
+
+  //   boutonFiltreActif(boutonAfficherTout);
+}
+
+// // Afficher les projets "Objets" :
+// function afficherObjets(categoryId) {
+//   const projetsfiltree = works.filter(function (work) {
+//     return work.categoryId === categoryId;
+//   });
+
+//   gallery.innerHTML = projetsfiltree
+//     .map(
+//       (work) =>
+//         `
+//     <figure>
+//     <img src="${work.imageUrl}" alt="${work.title}">
+//     <figcaption>${work.title}</figcaption>
+//     </figure>
+//     `
+//     )
+//     .join("");
+//   //   boutonFiltreActif(boutonAfficherObjets);
+// }
 
 // fonction pour changer le style du bouton de filtre actif :
 function boutonFiltreActif(bouton) {
@@ -55,86 +108,6 @@ function boutonFiltreActif(bouton) {
   });
   bouton.classList.add("btn-clicked");
 }
-
-// Afficher tous les projets :
-function afficherProjets() {
-  gallery.innerHTML = works
-    .map(
-      (work) =>
-        `
-    <figure>
-    <img src="${work.imageUrl}" alt="${work.title}">
-    <figcaption>${work.title}</figcaption>
-    </figure>
-    `
-    )
-    .join("");
-  boutonFiltreActif(boutonAfficherTout);
-}
-
-// Afficher les projets "Objets" :
-function afficherObjets() {
-  const projetsfiltree = works.filter(function (work) {
-    return work.categoryId === 1;
-  });
-  gallery.innerHTML = projetsfiltree
-    .map(
-      (work) =>
-        `
-    <figure>
-    <img src="${work.imageUrl}" alt="${work.title}">
-    <figcaption>${work.title}</figcaption>
-    </figure>
-    `
-    )
-    .join("");
-  boutonFiltreActif(boutonAfficherObjets);
-}
-
-// Afficher les projets "Appartements" :
-function afficherAppartements() {
-  const projetsfiltree = works.filter(function (work) {
-    return work.categoryId === 2;
-  });
-  gallery.innerHTML = projetsfiltree
-    .map(
-      (work) =>
-        `
-      <figure>
-      <img src="${work.imageUrl}" alt="${work.title}">
-      <figcaption>${work.title}</figcaption>
-      </figure>
-      `
-    )
-    .join("");
-  boutonFiltreActif(boutonAfficherAppartements);
-}
-
-// Afficher les projets "Hôtels & restaurents" :
-function afficherHotels() {
-  const projetsfiltree = works.filter(function (work) {
-    return work.categoryId === 3;
-  });
-  gallery.innerHTML = projetsfiltree
-    .map(
-      (work) =>
-        `
-    <figure>
-    <img src="${work.imageUrl}" alt="${work.title}">
-    <figcaption>${work.title}</figcaption>
-    </figure>
-    `
-    )
-    .join("");
-  boutonFiltreActif(boutonAfficherHotels);
-}
-
-// ** Gestion des boutons de filtrage ** //
-
-// boutonAfficherTout.addEventListener("click", afficherProjets);
-// boutonAfficherObjets.addEventListener("click", afficherObjets);
-// boutonAfficherAppartements.addEventListener("click", afficherAppartements);
-// boutonAfficherHotels.addEventListener("click", afficherHotels);
 
 // au chargement de la page, on afffiche tous les projets :
 // window.addEventListener("load", fetchCategories);
