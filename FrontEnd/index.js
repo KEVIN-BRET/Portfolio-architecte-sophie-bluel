@@ -3,8 +3,8 @@ const filtres = document.querySelector(".filtres");
 // on pointe la balise dans laquelle vont s'afficher les "projets"
 const gallery = document.querySelector(".gallery");
 
-// let works;
-// let categories;
+let works;
+let categories;
 
 // récupération des projets avec l'Api/works/
 function getWorks(categoryId) {
@@ -37,7 +37,7 @@ function getWorks(categoryId) {
         projetSousTitre.innerText = works[i].title;
         projetCard.appendChild(projetSousTitre);
       }
-      //   console.log(works);
+      console.log(works);
     });
 }
 // récupération des catégories avec l'Api/categories/
@@ -52,7 +52,14 @@ function getCategories() {
       boutonFilterTout.innerText = `Tous`;
       boutonFilterTout.className = "btn btn-all";
       boutonFilterTout.id = "filter-btn-all";
+      // au premier chargement, le bouton "tous" est "surligné"
+      boutonFilterTout.classList.add("btn-clicked");
+      // au click, il affiche "tous" les projets ...
       boutonFilterTout.addEventListener("click", () => getWorks());
+      // ... et il se "surligne", si il ne l'était plus !
+      boutonFilterTout.addEventListener("click", () =>
+        boutonFiltreActif(boutonFilterTout)
+      );
 
       filtres.appendChild(boutonFilterTout);
 
@@ -65,14 +72,26 @@ function getCategories() {
         boutonFiltrerCategories.innerText = nomCategorie;
         boutonFiltrerCategories.className = `btn btn-${Categorie}`;
         boutonFiltrerCategories.id = `filter-btn-${Categorie}`;
+        // au click, le bouton de la categories choisi change de style (se "surligne") :
+        boutonFiltrerCategories.addEventListener("click", () =>
+          boutonFiltreActif(boutonFiltrerCategories)
+        );
 
         filtres.appendChild(boutonFiltrerCategories);
-
+        // au click, il affiche les projets de sa catégorie :
         document
           .getElementById(`filter-btn-${Categorie}`)
           .addEventListener("click", () => getWorks(Categorie));
       }
     });
+}
+
+// fonction pour changer le style du bouton de filtre actif :
+function boutonFiltreActif(bouton) {
+  document.querySelectorAll(".btn-clicked").forEach((btn) => {
+    btn.classList.remove("btn-clicked");
+  });
+  bouton.classList.add("btn-clicked");
 }
 
 // On appelle l'affichage des catégories
