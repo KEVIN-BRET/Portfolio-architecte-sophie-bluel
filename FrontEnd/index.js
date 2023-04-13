@@ -37,8 +37,9 @@ function getWorks(categoryId) {
         projetSousTitre.innerText = works[i].title;
         projetCard.appendChild(projetSousTitre);
       }
-      console.log(works);
-    });
+      //   console.log(works);
+    })
+    .catch((error) => console.log(`L'API Works n'a pas répondue : ${error}`));
 }
 // récupération des catégories avec l'Api/categories/
 function getCategories() {
@@ -83,7 +84,10 @@ function getCategories() {
           .getElementById(`filter-btn-${Categorie}`)
           .addEventListener("click", () => getWorks(Categorie));
       }
-    });
+    })
+    .catch((error) =>
+      console.log(`L'API Categories n'a pas répondue : ${error}`)
+    );
 }
 
 // fonction pour changer le style du bouton de filtre actif :
