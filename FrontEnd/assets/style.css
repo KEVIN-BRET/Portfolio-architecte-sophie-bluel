@@ -127,8 +127,23 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+
+* {
+  text-decoration: none;
+  color: black;
+}
+
+:root {
+  --backgroung-color-light: #fffef8;
+  --middle-green: #1d6154;
+  --dark-green: #0e2f28;
+}
+
 /** end reset css**/
+
 body {
+  background-color: var(--backgroung-color-light);
+
   max-width: 1140px;
   margin: auto;
   font-family: "Work Sans";
@@ -173,8 +188,7 @@ nav li {
   padding: 0 10px;
   font-size: 1.2em;
 }
-
-li:hover {
+li a:hover {
   color: #b1663c;
 }
 #introduction {
@@ -219,27 +233,27 @@ li:hover {
 
 .btn {
   font-family: "Syne";
-  background-color: white;
-  color: #1d6154;
+  background-color: var(--backgroung-color-light);
+  color: var(--middle-green);
   height: 2rem;
-  border: 1px solid #1d6154;
+  border: 1px solid var(--middle-green);
   border-radius: 60px;
   padding: 5px 25px;
   transition: 0.15s ease-out;
 }
 
 .btn:hover {
-  color: white;
-  background-color: #1d6154;
+  color: var(--backgroung-color-light);
+  background-color: var(--middle-green);
 }
 
 .btn:active {
-  background-color: #0e2f28;
+  background-color: var(--dark-green);
 }
 
 .btn-clicked {
-  color: white;
-  background-color: #1d6154;
+  color: var(--backgroung-color-light);
+  background-color: var(--middle-green);
 }
 
 .gallery {
@@ -287,8 +301,8 @@ li:hover {
 input[type="submit"] {
   font-family: "Syne";
   font-weight: 700;
-  color: white;
-  background-color: #1d6154;
+  color: var(--backgroung-color-light);
+  background-color: var(--middle-green);
   margin: 2em auto;
   width: 180px;
   text-align: center;
@@ -300,3 +314,40 @@ footer nav ul {
   justify-content: flex-end;
   margin: 2em;
 }
+
+footer nav ul:hover {
+  color: #b1663c;
+}
+
+/** login **/
+
+#login {
+  width: 50%;
+  margin: auto;
+}
+#login > * {
+  text-align: center;
+}
+#login h2 {
+  margin-bottom: 20px;
+}
+#login form {
+  text-align: left;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+}
+#login form + p {
+  text-decoration: underline;
+}
+#login input {
+  height: 50px;
+  font-size: 1.2em;
+  border: none;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+#login label {
+  margin: 2em 0 1em 0;
+}
+
+/** login end **/
