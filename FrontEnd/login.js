@@ -1,3 +1,5 @@
+// On pointe le formulaire :
+const loginForm = document.getElementById("login-form");
 // On pointe les inputs email & password :
 const inputEmail = document.getElementById("email");
 const inputPassword = document.getElementById("userPassword");
@@ -21,6 +23,11 @@ inputPassword.addEventListener("input", (e) => {
   console.log(userPassword);
 });
 
+loginForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  authentification();
+});
+
 function authentification() {
   fetch("http://localhost:5678/api/users/login", {
     method: "POST",
@@ -35,7 +42,7 @@ function authentification() {
   })
     .then((response) => response.json())
     .then((data) => {
-      localStorage.setItem("token", data.token);
+      localStorage.setItem("Token Sophie Bluel", data.token);
       window.location.href = "index.html";
       console.log(data);
     })
@@ -43,13 +50,3 @@ function authentification() {
       console.log(error);
     });
 }
-// On pointe le formulaire :
-const loginForm = document.getElementById("login-form");
-loginForm.addEventListener("submit", () => {
-  authentification();
-});
-// On pointe le titre du formulaire :
-const loginTitle = document.getElementById("login-title");
-loginTitle.addEventListener("click", () => {
-  authentification();
-});
