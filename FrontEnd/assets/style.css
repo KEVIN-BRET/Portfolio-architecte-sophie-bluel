@@ -404,9 +404,7 @@ footer nav ul:hover {
 }
 
 #login input:not(:focus):invalid {
-  /* background-color: #fccbd8; */
   outline: 2px solid #b20a37;
-  /* color: #fff; */
   animation: headshake 100ms cubic-bezier(0.4, 0.1, 0.6, 0.9) 2;
 }
 
