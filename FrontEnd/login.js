@@ -17,8 +17,8 @@ function authentification() {
       // Si les données de réponses contiennent un token ...
       if (data.token) {
         loginerror.innerText = "";
-        // .. on l'enregistre dans le localstorage ..
-        localStorage.setItem("SophieBluelToken", data.token);
+        // .. on l'enregistre dans le Session Storage ..
+        sessionStorage.setItem("SophieBluelToken", data.token);
         // .. puis on redirige l'utilisateurs vers la page d'accueil :
         window.location.href = "index.html";
         // console.log(data.token);
