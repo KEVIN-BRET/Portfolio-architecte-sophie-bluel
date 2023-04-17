@@ -102,9 +102,13 @@ function boutonFiltreActif(bouton) {
 
 if (localStorage.SophieBluelToken) {
   logoutlink.style.display = "block";
+  editionmode.style.display = "flex";
+  header.style.marginTop = "100px";
+
   loginlink.style.display = "none";
 } else {
-  logoutlink.style.display = "none";
+  // logoutlink.style.display = "none";
+  // editionmode.style.display = "none";
   loginlink.style.display = "block";
 }
 
