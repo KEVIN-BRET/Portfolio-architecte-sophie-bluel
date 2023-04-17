@@ -3,6 +3,12 @@
    License: none (public domain)
 */
 
+::-webkit-input-placeholder {
+  /* WebKit browsers */
+  font-style: italic;
+  opacity: 0.5;
+}
+
 html,
 body,
 div,
@@ -376,11 +382,20 @@ footer nav ul:hover {
 }
 #login input {
   height: 50px;
+  padding-left: 1rem;
   font-size: 1.2em;
   border: none;
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 #login label {
   margin: 2em 0 1em 0;
+}
+
+#loginerror {
+  font-style: italic;
+  margin-top: 1.5rem;
+  font-size: 1.2em;
+  text-align: center;
+  color: red;
 }
 /** section login end **/

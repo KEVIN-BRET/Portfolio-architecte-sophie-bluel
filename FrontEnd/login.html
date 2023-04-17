@@ -32,12 +32,13 @@
   </header>
   <main>
     <section id="login">
-      <h2 id="login-title">Log In</h2>
+      <h2 id="logintitle">Log In</h2>
       <form id="loginform">
         <label for="email">Email</label>
-        <input type="email" name="email" id="email" />
+        <input type="email" name="email" id="email" placeholder="Saisissez votre email" />
         <label for="password">Mot de passe</label>
-        <input id="password" type="password" />
+        <input id="password" type="password" placeholder="Saisissez votre mot de passe" />
+        <p id="loginerror"></p>
         <input type="submit" value="Se connecter" />
       </form>
       <p><a href="#">Mot de passe oublié</a></p>
