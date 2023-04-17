@@ -24,10 +24,29 @@ function authentification() {
         console.log(data.token);
       } else {
         loginerror.innerText = "email ou mot de passe incorrect !";
-        console.log("email ou mot de passe incorrect !");
+        // console.log("email ou mot de passe incorrect !");
       }
     })
     .catch((error) => {
       console.log("l'API n'a pas répondue : " + error);
     });
 }
+
+//** validation du formaulaire */
+
+loginform.addEventListener("input", () => {
+  if (!email.validity.valid) {
+    emailerror.innerText = "Veuillez saisir une adresse email valide !";
+  } else {
+    emailerror.innerText = "";
+  }
+});
+
+loginform.addEventListener("input", () => {
+  if (!password.validity.valid) {
+    passworderror.innerText =
+      "Le mot de passe doit contenir entre 4 et 15 caractères !";
+  } else {
+    passworderror.innerText = "";
+  }
+});

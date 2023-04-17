@@ -9,6 +9,15 @@
   opacity: 0.5;
 }
 
+@keyframes headshake {
+  25% {
+    transform: translateX(1%);
+  }
+  75% {
+    transform: translateX(-1%);
+  }
+}
+
 html,
 body,
 div,
@@ -386,16 +395,34 @@ footer nav ul:hover {
   font-size: 1.2em;
   border: none;
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+
+  /* color: #1d6154; */
+  transition: background-color 500ms;
 }
+#login input:focus {
+  outline: 2px solid var(--middle-green);
+}
+
+#login input:not(:focus):invalid {
+  /* background-color: #fccbd8; */
+  outline: 2px solid #b20a37;
+  /* color: #fff; */
+  animation: headshake 100ms cubic-bezier(0.4, 0.1, 0.6, 0.9) 2;
+}
+
 #login label {
   margin: 2em 0 1em 0;
 }
 
-#loginerror {
+.errormsg {
+  margin-top: 0.5rem;
+  color: red;
   font-style: italic;
+}
+
+#loginerror {
   margin-top: 1.5rem;
   font-size: 1.2em;
   text-align: center;
-  color: red;
 }
 /** section login end **/
