@@ -216,14 +216,27 @@ nav ul {
   display: flex;
   align-items: center;
   list-style-type: none;
+  justify-content: flex-end;
 }
 nav li {
   padding: 0 10px;
   font-size: 1.2em;
+  margin: 0;
 }
 li a:hover {
   color: #b1663c;
 }
+
+#loginlink {
+  color: #1d6154;
+  display: ;
+}
+
+#logoutlink {
+  color: #b20a37;
+  display: none;
+}
+
 #introduction {
   display: flex;
   align-items: center;

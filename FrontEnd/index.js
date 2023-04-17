@@ -98,6 +98,23 @@ function boutonFiltreActif(bouton) {
   bouton.classList.add("btn-clicked");
 }
 
+//** ------------------  gestion du lien login / logout  ------------------- **//
+
+if (localStorage.SophieBluelToken) {
+  logoutlink.style.display = "block";
+  loginlink.style.display = "none";
+} else {
+  logoutlink.style.display = "none";
+  loginlink.style.display = "block";
+}
+
+logoutlink.addEventListener("click", () => {
+  localStorage.SophieBluelToken = "";
+  window.location.href = "index.html";
+});
+
+//** ----------------------------------------- **//
+
 // On appelle l'affichage des catégories
 getCategories();
 
