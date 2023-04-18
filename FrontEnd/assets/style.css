@@ -145,8 +145,8 @@ table {
 }
 
 * {
-  text-decoration: none;
-  color: black;
+  text-decoration: unset;
+  color: unset;
   box-sizing: border-box;
 }
 
@@ -263,7 +263,20 @@ body {
   background-color: grey;
   opacity: 0.7;
   height: 1px;
-  margin: 3rem 6rem;
+  margin: 2rem 6rem;
+}
+
+#addphoto {
+  margin: auto;
+}
+
+#deleteallphotos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1.5rem;
+  margin-bottom: 2.5rem;
+  color: #b20a37;
 }
 
 /** MODALE end **/
@@ -386,7 +399,8 @@ li a:hover {
   background-color: var(--middle-green);
 }
 
-.btn:active {
+.btn:active,
+.btn-static:active {
   background-color: var(--dark-green);
 }
 
