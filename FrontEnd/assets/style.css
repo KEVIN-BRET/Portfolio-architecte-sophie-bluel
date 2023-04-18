@@ -156,11 +156,20 @@ table {
 }
 /** end reset css**/
 
-/** Banniere mode edition **/
+/** Banniere + boutons mode edition start **/
 
-#editionmode {
+.edition {
+  display: none;
+  gap: 0.5rem;
+}
+
+.edition-main-photo {
+  margin: 1rem auto;
+  width: 80%;
+}
+
+#editionbanniere {
   position: fixed;
-  display: flex;
   align-items: center;
   justify-content: center;
   gap: 1rem;
@@ -169,19 +178,17 @@ table {
   width: 100%;
   height: 50px;
   background: black;
-  /* color: white; */
-  display: none;
 }
 
-#editionmode i {
+#editionbanniere i {
   color: white;
 }
 
-#editionmode p {
+#editionbanniere p {
   color: white;
 }
 
-#editionmode .changements {
+#editionbanniere .changements {
   background-color: white;
   display: flex;
   align-items: center;
@@ -191,7 +198,7 @@ table {
   /* color: white; */
 }
 
-/** Banniere mode edition **/
+/** Banniere + boutons mode edition end **/
 
 body {
   background-color: var(--backgroung-color-light);
@@ -251,13 +258,7 @@ li a:hover {
   color: #b1663c;
 }
 
-#loginlink {
-  color: #1d6154;
-  display: ;
-}
-
 #logoutlink {
-  color: #b20a37;
   display: none;
 }
 
@@ -292,9 +293,11 @@ li a:hover {
   padding: 0 1rem;
 }
 
-#portfolio h2 {
-  text-align: center;
-  margin-bottom: 1em;
+#portfolio .gallery-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
 }
 
 /** Boutons de filtrage **/
