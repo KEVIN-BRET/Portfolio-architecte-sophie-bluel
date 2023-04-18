@@ -98,7 +98,7 @@ function boutonFiltreActif(bouton) {
   bouton.classList.add("btn-clicked");
 }
 
-//** ------------------  gestion du lien login / logout  ------------------- **//
+//** ----- gestion du lien login / logout ----- //
 
 // si le token est présent dans le local storage :
 if (localStorage.SophieBluelToken) {
@@ -116,7 +116,27 @@ logoutlink.addEventListener("click", () => {
   window.location.href = "index.html";
 });
 
-//** ----------------------------------------- **//
+//** ----- ouverture / fermeture de la modale ----- **//
+
+// au click sur le bouton modifier, on affiche la modale :
+galleryedition.addEventListener("click", (e) => {
+  e.preventDefault();
+  modale1.style.display = "flex";
+});
+
+// au click sur le bouton fermer (x), on ferme la modale :
+closemodale.addEventListener("click", (e) => {
+  e.preventDefault();
+  modale1.style.display = "none";
+});
+// ou en appuyant sur Esc, on ferme la modale
+window.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" || e.key === "Esc") {
+    modale1.style.display = "none";
+  }
+});
+
+//** -----  ----- **/
 
 // On appelle l'affichage des catégories
 getCategories();

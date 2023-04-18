@@ -17,14 +17,49 @@
 </head>
 
 <body>
+  <!-- MODALE -->
+  <aside id="modale1" class="modale" role="dialog" aria-labelledby="titlemodale">
+
+    <div class="modale-wrapper">
+      <a href="#" id="closemodale"><i class="fa-solid fa-xmark"></i></a>
+      <h3 id="titlemodale">Gallerie photo</h3>
+      <div class="modale-gallery-container">
+        <p>What is Lorem Ipsum?
+          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+          standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
+          make a type specimen book. It has survived not only five centuries, but also the leap into electronic
+          typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset
+          sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus
+          PageMaker including versions of Lorem Ipsum.
+          <input>
+          <a href="#">Blabla</a>
+          Why do we use it?
+          It is a long established fact that a reader will be distracted by the readable content of a page when looking
+          at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as
+          opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing
+          packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum'
+          will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by
+          accident, sometimes on purpose (injected humour and the like).
+        </p>
+      </div>
+      <div class="separation-bar">
+
+      </div>
+
+
+
+  </aside>
+
+
+  <!-- BANNIERE EDITION -->
   <div id="editionbanniere" class="edition edition-banniere">
     <i class="fa-solid fa-pen-to-square"></i>
     <p>Mode édition</p>
     <div class="changements">Publier les changements</div>
 
   </div>
+  <!-- HEADER -->
   <header id="header">
-
     <a href="./index.html">
       <h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
     </a>
@@ -41,9 +76,10 @@
       </ul>
     </nav>
   </header>
+  <!-- MAIN -->
   <main>
+    <!-- SECTION INTRODUCTION -->
     <section id="introduction">
-
       <figure>
         <img src="./assets/images/sophie-bluel.png" alt="photo de Sophie Bluel" />
         <div id="mainphotoedition" class="edition edition-main-photo">
@@ -75,19 +111,16 @@
         </p>
       </article>
     </section>
+    <!-- SECTION PORTFOLIO -->
     <section id="portfolio">
-
       <div class="gallery-title">
-
         <div>
           <h2>Mes Projets</h2>
         </div>
-
         <div id="galleryedition" class="edition">
           <i class="fa-solid fa-pen-to-square"></i>
-          <p>modifier</p>
+          <p><a href="#" class="js-modale">modifier</a></p>
         </div>
-
       </div>
 
       <!-- Boutons de filtrage -->
@@ -96,6 +129,7 @@
 
       <div class="gallery"></div>
     </section>
+    <!-- SECTION CONTACT -->
     <section id="contact">
       <h2>Contact</h2>
       <p>Vous avez un projet ? Discutons-en !</p>
@@ -110,7 +144,7 @@
       </form>
     </section>
   </main>
-
+  <!-- FOOTER -->
   <footer>
     <nav>
       <ul>
