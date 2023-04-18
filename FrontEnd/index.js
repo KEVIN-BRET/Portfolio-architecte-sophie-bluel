@@ -102,15 +102,6 @@ function boutonFiltreActif(bouton) {
 
 // si le token est présent dans le local storage :
 if (localStorage.SophieBluelToken) {
-  // // on range les éléments à afficher dans un tableau :
-  // const elementToDisplay = [
-  //   logoutlink,
-  //   editionbanniere,
-  //   mainphotoedition,
-  //   maindescriptionedition,
-  //   galleryedition,
-  // ];
-
   // on affiche tout les éléments de la class .edition :
   document.querySelectorAll(".edition").forEach((element) => {
     element.style.display = "flex";
