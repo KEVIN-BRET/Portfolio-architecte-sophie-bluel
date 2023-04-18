@@ -100,19 +100,25 @@ function boutonFiltreActif(bouton) {
 
 //** ------------------  gestion du lien login / logout  ------------------- **//
 
+// si le token est présent dans le local storage :
 if (localStorage.SophieBluelToken) {
-  // si on a le token ..
-  logoutlink.style.display = "flex"; // on affiche le lien logout
+  // on range les éléments à afficher dans un tableau :
+  const elementToDisplay = [
+    logoutlink,
+    editionbanniere,
+    mainphotoedition,
+    maindescriptionedition,
+    galleryedition,
+  ];
+  // on affiche tout les éléments du tableau :
+  elementToDisplay.forEach((element) => {
+    element.style.display = "flex";
+  });
 
-  editionbanniere.style.display = "flex"; // on affiche la banniere édition
-  mainphotoedition.style.display = "flex"; // on affiche la banniere édition
-  maindescriptionedition.style.display = "flex"; // on affiche la banniere édition
-  galleryedition.style.display = "flex"; // on affiche la banniere édition
-
-  header.style.marginTop = "100px"; // on ajoute un peu de margin top pour compenser la banniere
+  header.style.marginTop = "100px"; // on ajoute du margin-top pour compenser la banniere
   loginlink.style.display = "none"; // on fait disparaitre le lien login
 }
-
+// au click sur "logout", on efface le token et on retourne sur index.html
 logoutlink.addEventListener("click", () => {
   localStorage.SophieBluelToken = "";
   window.location.href = "index.html";
