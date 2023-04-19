@@ -164,9 +164,9 @@ function getWorksInModal() {
         modalegalery.appendChild(projetCard);
 
         // projetPreview va contenir : img + trash + view :
-        const projetPreview = document.createElement("div");
+        const projetPreview = document.createElement("button");
         projetPreview.dataset.id = `projetpreview${works[i].id}`;
-        projetPreview.classList.add("projetPreview");
+        projetPreview.classList.add("projetpreview");
         projetCard.appendChild(projetPreview);
         // img = l'image :
         const projetImage = document.createElement("img");
@@ -175,23 +175,23 @@ function getWorksInModal() {
         projetImage.title = works[i].title;
         projetPreview.appendChild(projetImage);
         // trash = bouton de suppression :
-        const projetDelete = document.createElement("div");
+        const projetDelete = document.createElement("button");
         projetDelete.dataset.id = `deleteprojet${works[i].id}`;
-        projetDelete.classList.add("trash");
+        projetDelete.classList.add("icon", "icon-trash");
         projetDelete.title = "Supprimer ce projet";
         projetDelete.innerHTML += `<i class="fa-solid fa-trash-can"></i>`;
         projetPreview.appendChild(projetDelete);
         // view = bouton agrandir :
-        const projetLargeView = document.createElement("div");
-        projetLargeView.dataset.id = `LargeViewP${works[i].id}`;
-        projetLargeView.classList.add("LargeView");
+        const projetLargeView = document.createElement("button");
+        projetLargeView.dataset.id = `largeviewprojet${works[i].id}`;
+        projetLargeView.classList.add("icon", "icon-largeview");
         projetLargeView.title = "Agrandir";
-        projetDelete.innerHTML += `<i class="fa-solid fa-arrows-up-down-left-right"></i>`;
+        projetLargeView.innerHTML += `<i class="fa-solid fa-arrows-up-down-left-right"></i>`;
         projetPreview.appendChild(projetLargeView);
 
         // Soustitres :
         const projetSousTitre = document.createElement("figcaption");
-        projetSousTitre.innerText = "éditer";
+        projetSousTitre.innerHTML = `<a id="editerprojet" href="#">éditer</a>`;
         projetCard.appendChild(projetSousTitre);
       }
       //   console.log(works);

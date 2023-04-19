@@ -143,11 +143,18 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
-
+/* root reset */
 * {
   text-decoration: unset;
   color: unset;
   box-sizing: border-box;
+}
+/* reset button style */
+body button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
 }
 
 :root {
@@ -212,7 +219,24 @@ body {
   font-size: 14px;
 }
 
-/** MODALE start **/
+.btn-fixed {
+  font-family: "Syne";
+  color: var(--backgroung-color-light);
+  background-color: var(--middle-green);
+  height: 2rem;
+  border-radius: 60px;
+  padding: 5px 25px;
+  margin: 1rem auto;
+  transition: 0.15s ease-out;
+}
+.btn-fixed:hover {
+  opacity: 0.8;
+}
+.btn-fixed:active {
+  background-color: var(--dark-green);
+}
+
+/** ------------------------ MODALE (debut) ------------------------ **/
 
 #modale1 {
   display: none;
@@ -237,87 +261,99 @@ body {
   max-width: calc(100vw - 2rem);
   max-height: calc(100vw - 2rem);
   width: 630px;
-  height: 770px;
-  /* height: 600px; */
-  /* padding: 1.5rem; */
+  padding: 1rem;
 }
+
 .modale-wrapper .fa-xmark {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  margin: 1.5rem 1.5rem 0rem 1.5rem;
   font-size: 1.2rem;
 }
 
 .modale-wrapper h3 {
   font-size: 1.5rem;
   text-align: center;
-  margin-top: 1.5rem;
-  margin-bottom: 3rem;
+  margin-top: 1rem;
+  margin-bottom: 2.5rem;
 }
 
 .modale-gallery-container {
-  margin: 0 6rem;
+  margin: 0 5rem;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   gap: 0.5rem;
   overflow: initial;
 }
 
+/** ----- GALLERIE MODALE (debut) ----- **/
+
 .modale-gallery-container figure {
-  margin-bottom: -20px;
-  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  /* border: 1px solid black; */
 }
 
-.modale-gallery-container figure img {
-  width: 100%;
-  /* margin-top: 0.5rem; */
-}
-.projetPreview {
+.projetpreview {
   position: relative;
-  /* padding: 10px; */
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.projetpreview img {
+  position: relative;
+  width: 100%;
+}
+
+.projetpreview .icon {
+  position: absolute;
+  top: 5px;
   z-index: 5;
-  top: -125px; /*  */
-  left: 58px;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 1.5rem;
-  height: 1.5rem;
-  border-radius: 3px;
   background-color: black;
+  border-radius: 3px;
   color: white;
-
-  scale: 0.7;
-  transition: 0.15s ease-in-out;
+  width: 1.2rem;
+  height: 1.2rem;
 }
 
-.trash:hover {
-  scale: 1.2;
+.projetpreview .icon-trash {
+  left: 57px;
 }
+.projetpreview .icon-largeview {
+  left: 34px;
+}
+
+/** ----- GALLERIE MODALE (fin) ----- **/
 
 .modale-wrapper .separation-bar {
   background-color: grey;
   opacity: 0.7;
   height: 1px;
-  margin: 2rem 6rem;
+  margin: 1rem 6rem;
   z-index: 3;
 }
 
-#addphoto {
-  margin: auto;
+.modale-wrapper .btn-fixed {
 }
 
 #deleteallphotos {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 1.5rem;
-  margin-bottom: 2.5rem;
-  color: #b20a37;
+  margin: 0.5rem auto;
+  color: red;
+  opacity: 0.7;
+}
+#deleteallphotos:hover {
+  opacity: 1;
 }
 
-/** MODALE end **/
+/** ------------------------ MODALE (fin) ------------------------ **/
 
 header {
   display: flex;
