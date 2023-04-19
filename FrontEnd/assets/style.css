@@ -266,17 +266,19 @@ body {
 
 .modale-gallery-container figure {
   margin-bottom: -20px;
+  border: 1px solid black;
 }
 
 .modale-gallery-container figure img {
   width: 100%;
   /* margin-top: 0.5rem; */
 }
-.trash {
+.projetPreview {
   position: relative;
+  /* padding: 10px; */
   z-index: 5;
-  top: -115px;
-  left: 50px;
+  top: -125px; /*  */
+  left: 58px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -284,10 +286,14 @@ body {
   height: 1.5rem;
   border-radius: 3px;
   background-color: black;
-}
-/* .modale-gallery-container figure  */
-.fa-trash-can {
   color: white;
+
+  scale: 0.7;
+  transition: 0.15s ease-in-out;
+}
+
+.trash:hover {
+  scale: 1.2;
 }
 
 .modale-wrapper .separation-bar {

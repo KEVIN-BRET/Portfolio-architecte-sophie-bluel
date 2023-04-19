@@ -158,24 +158,41 @@ function getWorksInModal() {
 
       // on affiche chaque projets avec une boucle for
       for (let i = 0; i < works.length; i++) {
-        //
+        // Création d'une carte par projet (preview + soustitre) :
         const projetCard = document.createElement("figure");
         projetCard.dataset.id = `${works[i].id}`;
         modalegalery.appendChild(projetCard);
 
+        // projetPreview va contenir : img + trash + view :
+        const projetPreview = document.createElement("div");
+        projetPreview.dataset.id = `projetpreview${works[i].id}`;
+        projetPreview.classList.add("projetPreview");
+        projetCard.appendChild(projetPreview);
+        // img = l'image :
         const projetImage = document.createElement("img");
         projetImage.src = works[i].imageUrl;
         projetImage.alt = works[i].title;
-        projetCard.appendChild(projetImage);
+        projetImage.title = works[i].title;
+        projetPreview.appendChild(projetImage);
+        // trash = bouton de suppression :
+        const projetDelete = document.createElement("div");
+        projetDelete.dataset.id = `deleteprojet${works[i].id}`;
+        projetDelete.classList.add("trash");
+        projetDelete.title = "Supprimer ce projet";
+        projetDelete.innerHTML += `<i class="fa-solid fa-trash-can"></i>`;
+        projetPreview.appendChild(projetDelete);
+        // view = bouton agrandir :
+        const projetLargeView = document.createElement("div");
+        projetLargeView.dataset.id = `LargeViewP${works[i].id}`;
+        projetLargeView.classList.add("LargeView");
+        projetLargeView.title = "Agrandir";
+        projetDelete.innerHTML += `<i class="fa-solid fa-arrows-up-down-left-right"></i>`;
+        projetPreview.appendChild(projetLargeView);
 
+        // Soustitres :
         const projetSousTitre = document.createElement("figcaption");
         projetSousTitre.innerText = "éditer";
         projetCard.appendChild(projetSousTitre);
-
-        projetCard.innerHTML += ` <div id="deleteP${works[i].id}" class="trash">
-            <i class="fa-solid fa-trash-can"></i>
-          </div>
-        `;
       }
       //   console.log(works);
     })
