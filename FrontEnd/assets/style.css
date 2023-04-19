@@ -294,6 +294,19 @@ body {
   /* border: 1px solid black; */
 }
 
+.modale-gallery-container figure:hover {
+  filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.2));
+}
+
+.modale-gallery-container figure:hover > .projetpreview .icon-largeview {
+  display: block;
+}
+
+.modale-gallery-container figure:focus > .projetpreview .icon-largeview {
+  filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.2));
+  display: block;
+}
+
 .projetpreview {
   position: relative;
   background: none;
@@ -320,12 +333,16 @@ body {
   width: 1.2rem;
   height: 1.2rem;
 }
+.projetpreview .icon:hover {
+  scale: 1.2;
+}
 
 .projetpreview .icon-trash {
   left: 57px;
 }
 .projetpreview .icon-largeview {
   left: 34px;
+  display: none;
 }
 
 /** ----- GALLERIE MODALE (fin) ----- **/
