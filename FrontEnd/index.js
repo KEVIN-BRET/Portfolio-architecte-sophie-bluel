@@ -41,6 +41,7 @@ function getWorks(categoryId) {
     })
     .catch((error) => console.log(`L'API Works n'a pas répondue : ${error}`));
 }
+
 // récupération des catégories avec l'Api/categories/
 function getCategories() {
   fetch("http://localhost:5678/api/categories")
@@ -118,13 +119,14 @@ logoutlink.addEventListener("click", () => {
 
 //** ----- ouverture / fermeture de la modale ----- **//
 
-// au click sur le bouton modifier, on affiche la modale :
+// la modale s'ouvre au click sur le bouton modifier :
 galleryedition.addEventListener("click", (e) => {
   e.preventDefault();
   modale1.style.display = "flex";
+  getWorksInModal();
 });
 
-// au click sur le bouton fermer (x), on ferme la modale :
+// la modale se ferme au click sur le bouton fermer (x) :
 closemodale.addEventListener("click", (e) => {
   e.preventDefault();
   modale1.style.display = "none";
@@ -135,8 +137,52 @@ window.addEventListener("keydown", (e) => {
     modale1.style.display = "none";
   }
 });
+// ou en cliaquant à coté de la modale :
+window.addEventListener("click", (e) => {
+  // console.log(e);
+  if (e.target == modale1) {
+    modale1.style.display = "none";
+  }
+});
 
-//** -----  ----- **/
+//** ----- affichage des projets dans la modale ----- **//
+
+function getWorksInModal() {
+  fetch("http://localhost:5678/api/works")
+    .then((response) => response.json())
+    .then((data) => {
+      works = data;
+
+      // on efface les élément présent dans la gallery
+      modalegalery.innerHTML = "";
+
+      // on affiche chaque projets avec une boucle for
+      for (let i = 0; i < works.length; i++) {
+        //
+        const projetCard = document.createElement("figure");
+        projetCard.dataset.id = `${works[i].id}`;
+        modalegalery.appendChild(projetCard);
+
+        const projetImage = document.createElement("img");
+        projetImage.src = works[i].imageUrl;
+        projetImage.alt = works[i].title;
+        projetCard.appendChild(projetImage);
+
+        const projetSousTitre = document.createElement("figcaption");
+        projetSousTitre.innerText = "éditer";
+        projetCard.appendChild(projetSousTitre);
+
+        projetCard.innerHTML += ` <div id="deleteP${works[i].id}" class="trash">
+            <i class="fa-solid fa-trash-can"></i>
+          </div>
+        `;
+      }
+      //   console.log(works);
+    })
+    .catch((error) => console.log(`L'API Works n'a pas répondue : ${error}`));
+}
+
+//** ----- Lancement de la page d'accueil ----- **/
 
 // On appelle l'affichage des catégories
 getCategories();
