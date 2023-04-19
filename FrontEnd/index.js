@@ -181,6 +181,14 @@ function getWorksInModal() {
         projetDelete.title = "Supprimer ce projet";
         projetDelete.innerHTML += `<i class="fa-solid fa-trash-can"></i>`;
         projetPreview.appendChild(projetDelete);
+
+        // Suppression d'un projet au click sur la corbeille :
+        projetDelete.addEventListener("click", (e) => {
+          // e.preventDefault();
+          deleteWork(works[i].id);
+          getWorksInModal();
+        });
+
         // view = bouton agrandir :
         const projetLargeView = document.createElement("button");
         projetLargeView.dataset.id = `largeviewprojet${works[i].id}`;
@@ -198,6 +206,21 @@ function getWorksInModal() {
     })
     .catch((error) => console.log(`L'API Works n'a pas répondue : ${error}`));
 }
+
+// --------------------------------------------------------
+
+function deleteWork(id) {
+  fetch(`http://localhost:5678/api/works/${id}`, {
+    method: "DELETE",
+    headers: {
+      "content-Type": "application/json",
+      accept: "*/*",
+      Authorization: `Bearer ${localStorage.SophieBluelToken}`,
+    },
+  });
+}
+
+// --------------------------------------------------------
 
 //** ----- Lancement de la page d'accueil ----- **/
 
