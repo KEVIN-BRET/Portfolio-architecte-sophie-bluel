@@ -128,7 +128,7 @@ galleryedition.addEventListener("click", (e) => {
 
 // la modale se ferme au click sur le bouton fermer (x) :
 closemodale.addEventListener("click", (e) => {
-  e.preventDefault();
+  // e.preventDefault();
   modale1.style.display = "none";
 });
 // ou en appuyant sur Esc, on ferme la modale
@@ -184,7 +184,6 @@ function getWorksInModal() {
 
         // Suppression d'un projet au click sur la corbeille :
         projetDelete.addEventListener("click", (e) => {
-          // e.preventDefault();
           deleteWork(works[i].id);
           getWorksInModal();
         });
