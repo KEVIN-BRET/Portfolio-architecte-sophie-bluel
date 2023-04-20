@@ -39,7 +39,10 @@ function getWorks(categoryId) {
       }
       //   console.log(works);
     })
-    .catch((error) => console.log(`L'API Works n'a pas répondue : ${error}`));
+    .catch((error) => {
+      console.log(`L'API Works n'a pas répondue : ${error}`);
+      galleryerror.innerText = "Impossible d'afficher les projets !";
+    });
 }
 
 // récupération des catégories avec l'Api/categories/
@@ -86,9 +89,10 @@ function getCategories() {
           .addEventListener("click", () => getWorks(Categorie));
       }
     })
-    .catch((error) =>
-      console.log(`L'API Categories n'a pas répondue : ${error}`)
-    );
+    .catch((error) => {
+      console.log(`L'API Categories n'a pas répondue : ${error}`);
+      filtreserror.innerText = "Impossible d'afficher les catégories !";
+    });
 }
 
 // fonction pour changer le style du bouton de filtre actif :

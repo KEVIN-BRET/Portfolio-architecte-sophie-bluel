@@ -30,6 +30,8 @@ function authentification() {
     })
     .catch((error) => {
       console.log("l'API n'a pas répondue : " + error);
+      loginerror.innerText =
+        "Serveur injoignable, veuillez rééssayer plus tard ..";
     });
 }
 
