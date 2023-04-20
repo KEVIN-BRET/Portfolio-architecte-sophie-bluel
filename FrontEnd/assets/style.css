@@ -161,6 +161,10 @@ body button {
   --backgroung-color-light: #fffef8;
   --middle-green: #1d6154;
   --dark-green: #0e2f28;
+
+  --error: #be2d25;
+  --error-light: #d8817c;
+  --error-dark: #851f1a;
 }
 /** end reset css**/
 
@@ -231,10 +235,30 @@ body {
   transition: 0.15s ease-out;
 }
 .btn-fixed:hover {
+  cursor: pointer;
   opacity: 0.9;
 }
 .btn-fixed:active {
   background-color: var(--dark-green);
+}
+
+.btn-fixed-red {
+  font-family: "Syne";
+  text-align: center;
+  color: var(--backgroung-color-light);
+  background-color: var(--error);
+  height: 2rem;
+  border-radius: 60px;
+  padding: 5px 50px;
+  margin: 1rem auto;
+  transition: 0.15s ease-out;
+}
+.btn-fixed-red:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+.btn-fixed-red:active {
+  background-color: var(--error-dark);
 }
 
 /** ------------------------ MODALE (debut) ------------------------ **/
@@ -254,10 +278,10 @@ body {
   background: rgba(0, 0, 0, 0.7);
 }
 .modale-wrapper {
+  background: var(--backgroung-color-light);
   display: flex;
   flex-direction: column;
   overflow: auto;
-  background: white;
   border-radius: 0.4rem;
   max-width: calc(100vw - 2rem);
   max-height: calc(100vw - 2rem);
@@ -277,6 +301,13 @@ body {
   text-align: center;
   margin-top: 1rem;
   margin-bottom: 2.5rem;
+}
+
+.modale-wrapper h4 {
+  font-size: 1rem;
+  text-align: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .modale-gallery-container {
@@ -356,9 +387,6 @@ body {
   z-index: 3;
 }
 
-.modale-wrapper .btn-fixed {
-}
-
 #deleteallphotos {
   display: flex;
   align-items: center;
@@ -370,6 +398,17 @@ body {
 #deleteallphotos:hover {
   opacity: 1;
 }
+
+/** ---------- modale supprimer - repose box -------- **/
+
+.reponsebox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+/** ---------- modale supprimer - repose box -------- **/
 
 /** ------------------------ MODALE (fin) ------------------------ **/
 

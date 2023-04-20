@@ -186,11 +186,57 @@ function getWorksInModal() {
         projetDelete.innerHTML += `<i class="fa-solid fa-trash-can"></i>`;
         projetPreview.appendChild(projetDelete);
 
+        //*--------------------------------------------------------
+
+        function deleteConfirm(id) {
+          // on vide le contenu de la modale :
+          modalewrapper.innerHTML = "";
+          // on créé un titre :
+          const deleteConfirmTitle = document.createElement("h4");
+          deleteConfirmTitle.innerText = `Voulez-vous vraiment supprimer le projet :
+          \n${works[i].title}`;
+          // on affiche la photo du projet :
+          const projetImage = document.createElement("img");
+          projetImage.src = works[i].imageUrl;
+          projetImage.alt = works[i].title;
+          projetImage.title = works[i].title;
+          projetImage.width = 200;
+          projetImage.style.margin = "0 auto";
+          // on créé un conteneur de bouton réponse :
+          const reponseBox = document.createElement("div");
+          reponseBox.classList.add("reponsebox");
+
+          // on créé un bouton annuler :
+          const reponseAnnuler = document.createElement("button");
+          reponseAnnuler.innerText = "Annuler";
+          reponseAnnuler.classList.add("btn-fixed");
+
+          // on créé un bouton supprimer :
+          const reponseSupprimer = document.createElement("button");
+          reponseSupprimer.innerText = "Supprimer";
+          reponseSupprimer.classList.add("btn-fixed-red");
+
+          modalewrapper.appendChild(deleteConfirmTitle);
+          modalewrapper.appendChild(projetImage);
+          modalewrapper.appendChild(reponseBox);
+          reponseBox.appendChild(reponseAnnuler);
+          reponseBox.appendChild(reponseSupprimer);
+        }
+
         // Suppression d'un projet au click sur la corbeille :
-        projetDelete.addEventListener("click", (e) => {
-          deleteWork(works[i].id);
-          getWorksInModal();
-        });
+        projetDelete.addEventListener("click", (id) => deleteConfirm());
+
+        //
+
+        // // Suppression d'un projet au click sur la corbeille :
+        // projetDelete.addEventListener("click", (e) => {
+        //   if (confirm("Supprimer ce projet ?")) {
+        //     deleteWork(works[i].id);
+        //     getWorksInModal();
+        //   }
+        // });
+
+        //*--------------------------------------------------------
 
         // view = bouton agrandir :
         const projetLargeView = document.createElement("button");
