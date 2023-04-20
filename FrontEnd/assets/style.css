@@ -267,6 +267,7 @@ body {
   display: none;
 }
 .modale {
+  /* position: relative; */
   position: fixed;
   display: flex;
   align-items: center;
@@ -278,6 +279,7 @@ body {
   background: rgba(0, 0, 0, 0.7);
 }
 .modale-wrapper {
+  /* position: absolute; */
   background: var(--backgroung-color-light);
   display: flex;
   flex-direction: column;
@@ -355,7 +357,6 @@ body {
 .projetpreview .icon {
   position: absolute;
   top: 5px;
-  z-index: 5;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -384,7 +385,6 @@ body {
   opacity: 0.7;
   height: 1px;
   margin: 1rem 6rem;
-  z-index: 3;
 }
 
 #deleteallphotos {
@@ -399,16 +399,71 @@ body {
   opacity: 1;
 }
 
-/** ---------- modale supprimer - repose box -------- **/
+/** ---------- modale confirmation-window (début)  -------- **/
+
+#confirmationwindow {
+  display: none;
+}
+
+.confirmation-window {
+  /* position: absolute; */
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.7);
+}
+.confirmation-window-wrapper {
+  border: 1px solid grey;
+  position: absolute;
+  background: var(--backgroung-color-light);
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  border-radius: 0.4rem;
+  max-width: calc(100vw - 2rem);
+  max-height: calc(100vw - 2rem);
+  width: 350px;
+  padding: 1rem;
+}
+
+.confirmation-window-wrapper h3 {
+  font-size: 1.1rem;
+  text-align: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
 
 .reponsebox {
   display: flex;
   align-items: center;
   justify-content: center;
   margin-top: 1rem;
+  gap: 2rem;
 }
 
-/** ---------- modale supprimer - repose box -------- **/
+.bouton-confirmation {
+  font-family: "Syne";
+}
+
+.bouton-confirmation:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+#annulersuppression {
+  color: #1d6154;
+}
+
+#confirmersuppression {
+  color: #b20a37;
+}
+
+/** ---------- modale confirmation-window (fin)  -------- **/
 
 /** ------------------------ MODALE (fin) ------------------------ **/
 

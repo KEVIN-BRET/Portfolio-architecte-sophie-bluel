@@ -21,8 +21,6 @@
   <aside id="modale1" class="modale" role="dialog" aria-labelledby="titlemodale">
 
     <div id="modalewrapper" class="modale-wrapper">
-
-
       <a href="#" id="closemodale"><i class="fa-solid fa-xmark"></i></a>
       <h3 id="titlemodale">Gallerie photo</h3>
       <div id="modalegalery" class="modale-gallery-container"></div>
@@ -31,7 +29,26 @@
         <a href="#">Ajouter une photo</a>
       </button>
       <a href="#" id="deleteallphotos">Supprimer la galerie</a>
+    </div>
 
+    <!-- je créé une fenetre de confrimation de suppression dans la modale(wrapper) -->
+
+    <aside id="confirmationwindow" class="confirmation-window" role="dialog" aria-labelledby="confirmationtitle">
+
+      <div id="confirmationwindowwrapper" class="confirmation-window-wrapper">
+        <p id="confirmationtitle">Voulez-vous vraiment supprimer :</p>
+        <h3 id="projetasupprimer"></h3>
+        <img id="imageprojetasupprimer">
+
+        <div class="reponsebox">
+          <button id="annulersuppression" class="bouton-confirmation">Annuler</button>
+          <button id="confirmersuppression" class="bouton-confirmation">Supprimer</button>
+        </div>
+
+      </div>
+
+
+    </aside>
 
 
   </aside>

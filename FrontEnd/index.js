@@ -185,59 +185,6 @@ function getWorksInModal() {
         projetDelete.title = "Supprimer ce projet";
         projetDelete.innerHTML += `<i class="fa-solid fa-trash-can"></i>`;
         projetPreview.appendChild(projetDelete);
-
-        //*--------------------------------------------------------
-
-        function deleteConfirm(id) {
-          // on vide le contenu de la modale :
-          modalewrapper.innerHTML = "";
-          // on créé un titre :
-          const deleteConfirmTitle = document.createElement("h4");
-          deleteConfirmTitle.innerText = `Voulez-vous vraiment supprimer le projet :
-          \n${works[i].title}`;
-          // on affiche la photo du projet :
-          const projetImage = document.createElement("img");
-          projetImage.src = works[i].imageUrl;
-          projetImage.alt = works[i].title;
-          projetImage.title = works[i].title;
-          projetImage.width = 200;
-          projetImage.style.margin = "0 auto";
-          // on créé un conteneur de bouton réponse :
-          const reponseBox = document.createElement("div");
-          reponseBox.classList.add("reponsebox");
-
-          // on créé un bouton annuler :
-          const reponseAnnuler = document.createElement("button");
-          reponseAnnuler.innerText = "Annuler";
-          reponseAnnuler.classList.add("btn-fixed");
-
-          // on créé un bouton supprimer :
-          const reponseSupprimer = document.createElement("button");
-          reponseSupprimer.innerText = "Supprimer";
-          reponseSupprimer.classList.add("btn-fixed-red");
-
-          modalewrapper.appendChild(deleteConfirmTitle);
-          modalewrapper.appendChild(projetImage);
-          modalewrapper.appendChild(reponseBox);
-          reponseBox.appendChild(reponseAnnuler);
-          reponseBox.appendChild(reponseSupprimer);
-        }
-
-        // Suppression d'un projet au click sur la corbeille :
-        projetDelete.addEventListener("click", (id) => deleteConfirm());
-
-        //
-
-        // // Suppression d'un projet au click sur la corbeille :
-        // projetDelete.addEventListener("click", (e) => {
-        //   if (confirm("Supprimer ce projet ?")) {
-        //     deleteWork(works[i].id);
-        //     getWorksInModal();
-        //   }
-        // });
-
-        //*--------------------------------------------------------
-
         // view = bouton agrandir :
         const projetLargeView = document.createElement("button");
         projetLargeView.dataset.id = `largeviewprojet${works[i].id}`;
@@ -250,8 +197,39 @@ function getWorksInModal() {
         const projetSousTitre = document.createElement("figcaption");
         projetSousTitre.innerHTML = `<a id="editerprojet" href="#">éditer</a>`;
         projetCard.appendChild(projetSousTitre);
+
+        // Suppression d'un projet au click sur la corbeille :
+        projetDelete.addEventListener("click", (id) => deleteConfirm());
+
+        // ** Fonction de confirmation de suppression d'un projet ** //
+
+        function deleteConfirm(id) {
+          // on affiche la fenêtre de confirmation :
+          confirmationwindow.style.display = "flex";
+          // on récupère le nom du projet :
+          projetasupprimer.innerText = `${works[i].title}`;
+          // on récupère l'image & ses attibuts :
+          imageprojetasupprimer.src = works[i].imageUrl;
+          imageprojetasupprimer.alt = works[i].title;
+          imageprojetasupprimer.title = works[i].title;
+          imageprojetasupprimer.width = 150;
+          imageprojetasupprimer.style.margin = "0 auto";
+
+          // évènement au click sur "Supprimer" :
+          confirmersuppression.addEventListener("click", () => {
+            console.log("click supprimer");
+            deleteWork(works[i].id);
+            confirmationwindow.style.display = "none";
+            getWorksInModal();
+          });
+
+          // évènement au click sur "Annuler" :
+          annulersuppression.addEventListener("click", () => {
+            console.log("click annuler");
+            confirmationwindow.style.display = "none";
+          });
+        }
       }
-      //   console.log(works);
     })
     .catch((error) => console.log(`L'API Works n'a pas répondue : ${error}`));
 }
