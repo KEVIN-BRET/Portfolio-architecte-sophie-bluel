@@ -25,9 +25,7 @@
       <h3 id="titlemodale">Gallerie photo</h3>
       <div id="modalegalery" class="modale-gallery-container"></div>
       <div class="separation-bar"></div>
-      <button id="addphoto" class="btn-fixed">
-        <a href="#">Ajouter une photo</a>
-      </button>
+      <button id="addPhotoBtn" class="btn-fixed">Ajouter une photo </button>
       <a href="#" id="deleteallphotos">Supprimer la galerie</a>
     </div>
 
@@ -50,26 +48,29 @@
     <!-- Fenêtre d'ajout de photo -->
     <aside id="addPhotoWindow" class="addphoto-window" role="dialog" aria-labelledby="addphototitle">
       <div id="addphotowindowwrapper" class="addphoto-window-wrapper">
-        <h3 id="addphototitle">Ajout photo</>
-          <!-- Formulaire d'envoi de photo -->
-          <form id="addphotoform" class="addphotoform_group">
+        <div class="wrappernav">
+          <i id="closeAddPhotoWindow" class="fa-solid fa-arrow-left"></i>
+          <i id="returnToGallery" class="fa-solid fa-xmark"></i>
+        </div>
+        <h3 id="addphototitle">Ajout photo</h3>
+        <!-- Formulaire d'envoi de photo -->
+        <form id="addphotoform" class="addphotoform_group">
 
-            <label for="categorie">categorie</label>
-            <select name="categorie" id="categorie">
-              <option value="categorie">categorie1</option>
-              <option value="categorie">categorie2</option>
-              <option value="categorie">categorie3</option>
-              <option value="categorie">categorie4</option>
-            </select>
+          <label for="photoname">Titre</label>
+          <input type=text name="photoname" id="photoname">
 
-            <label for="password">Mot de passe</label>
-            <input id="password" type="password" placeholder="Saisissez votre mot de passe" minlength="4"
-              maxlength="15" />
-            <p id="passworderror" class="errormsg"></p>
-            <p id="loginerror" class="errormsg"></p>
-            <div class="separation-bar"></div>
-            <input type="submit" value="Valider" class="" />
-          </form>
+          <label for="categorie">Catégorie</label>
+          <select name="categorie" id="categorie">
+            <option value="categorie"></option>
+            <option value="categorie">categorie1</option>
+            <option value="categorie">categorie2</option>
+            <option value="categorie">categorie3</option>
+          </select>
+
+
+          <div class="separation-bar"></div>
+          <input id="submitPhoto" type="submit" value="Valider" class="" />
+        </form>
 
       </div>
 

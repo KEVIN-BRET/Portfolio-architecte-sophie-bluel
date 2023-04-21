@@ -196,8 +196,24 @@ function getWorksInModal() {
 
         // Suppression d'un projet au click sur la corbeille :
         projetDelete.onclick = (id) => deleteConfirm(id);
+
         // Suppression de tous les projets :
         // (non demandé : je coderai cette fonction plus tard ..)
+
+        // Ouverture de la modale d'ajout photo :
+        addPhotoBtn.onclick = () => {
+          addPhotoWindow.style.display = "flex";
+        };
+
+        // Fermeture de la modale d'ajout photo :
+        closeAddPhotoWindow.onclick = () => {
+          addPhotoWindow.style.display = "none";
+          getWorksInModal();
+        };
+        returnToGallery.onclick = () => {
+          addPhotoWindow.style.display = "none";
+          getWorksInModal();
+        };
 
         // ** Fonction de confirmation de suppression ** //
 
