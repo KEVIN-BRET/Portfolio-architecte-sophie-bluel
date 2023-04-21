@@ -166,7 +166,6 @@ function getWorksInModal() {
         const projetCard = document.createElement("figure");
         projetCard.dataset.id = `${works[i].id}`;
         modalegalery.appendChild(projetCard);
-
         // projetPreview va contenir : img + trash + view :
         const projetPreview = document.createElement("button");
         projetPreview.dataset.id = `projetpreview${works[i].id}`;
@@ -191,7 +190,6 @@ function getWorksInModal() {
         projetLargeView.title = "Agrandir";
         projetLargeView.innerHTML += `<i class="fa-solid fa-arrows-up-down-left-right"></i>`;
         projetPreview.appendChild(projetLargeView);
-
         // Soustitres :
         const projetSousTitre = document.createElement("figcaption");
         projetSousTitre.innerHTML = `<a id="editerprojet" href="#">éditer</a>`;
@@ -199,14 +197,11 @@ function getWorksInModal() {
 
         // Suppression d'un projet au click sur la corbeille :
         projetDelete.onclick = (id) => deleteConfirm(id);
-
         // Suppression de tous les projets :
         const allWorks = works.map(function (work) {
           return work.id;
         });
         deleteallphotos.onclick = (id) => {
-          console.log(allWorks);
-          // deleteConfirm(works);
           deleteConfirm(allWorks);
         };
 
@@ -215,7 +210,6 @@ function getWorksInModal() {
         function deleteConfirm(id) {
           // on affiche la fenêtre de confirmation :
           confirmationwindow.style.display = "flex";
-
           // Si on clique sur "Supprimer la galerie" :
           // (si la valeur est un tableau[de tous les projets])
           if (Array.isArray(id)) {
@@ -223,8 +217,6 @@ function getWorksInModal() {
             projetasupprimer.innerText = `!! TOUS LES PROJETS !!`;
             imageprojetasupprimer.src = "";
             imageprojetasupprimer.alt = "";
-            imageprojetasupprimer.title = "";
-            imageprojetasupprimer.width = "";
             // sinon ..
           } else {
             // on récupère le nom du projet :
@@ -239,15 +231,20 @@ function getWorksInModal() {
 
           // évènement au click sur "Supprimer" :
           confirmersuppression.onclick = () => {
-            console.log("supprimer n°" + works[i].id);
-            // deleteWork(works[i].id);
+            if (Array.isArray(id)) {
+              console.log("supprimer toute la gallerie !!");
+              deleteWork(id);
+            } else {
+              console.log("supprimer n°" + works[i].id);
+              deleteWork(works[i].id);
+            }
             getWorksInModal();
             confirmationwindow.style.display = "none";
           };
 
           // évènement au click sur "Annuler" :
           annulersuppression.onclick = () => {
-            console.log("annuler supprimer n°" + works[i].id);
+            console.log("Suppression annulée :)");
             confirmationwindow.style.display = "none";
           };
         }
@@ -266,7 +263,7 @@ function deleteWork(id) {
       accept: "*/*",
       Authorization: `Bearer ${localStorage.SophieBluelToken}`,
     },
-  });
+  }).catch((error) => console.log(`L'API Works n'a pas répondue : ${error}`));
 }
 
 //** ----- Lancement de la page d'accueil ----- **/
