@@ -17,22 +17,21 @@ function getWorks(categoryId) {
       if (categoryId) {
         works = works.filter((work) => work.categoryId === categoryId);
       }
-
       // on efface les élément présent dans la gallery
       gallery.innerHTML = "";
 
       // on affiche chaque projets (filtrés ou non), avec une boucle for
       for (let i = 0; i < works.length; i++) {
-        //
+        // chaque projet sera contenu dans une <figure> ..
         const projetCard = document.createElement("figure");
         projetCard.dataset.id = `categorie${works[i].categoryId}`;
         gallery.appendChild(projetCard);
-
+        // qui contiendra une image ..
         const projetImage = document.createElement("img");
         projetImage.src = works[i].imageUrl;
         projetImage.alt = works[i].title;
         projetCard.appendChild(projetImage);
-
+        // .. et un sous titre
         const projetSousTitre = document.createElement("figcaption");
         projetSousTitre.innerText = works[i].title;
         projetCard.appendChild(projetSousTitre);
