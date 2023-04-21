@@ -180,7 +180,6 @@ function getWorksInModal() {
         projetPreview.appendChild(projetImage);
         // trash = bouton de suppression :
         const projetDelete = document.createElement("button");
-        projetDelete.dataset.id = `deleteprojet${works[i].id}`;
         projetDelete.classList.add("icon", "icon-trash");
         projetDelete.title = "Supprimer ce projet";
         projetDelete.innerHTML += `<i class="fa-solid fa-trash-can"></i>`;
@@ -199,42 +198,65 @@ function getWorksInModal() {
         projetCard.appendChild(projetSousTitre);
 
         // Suppression d'un projet au click sur la corbeille :
-        projetDelete.addEventListener("click", (id) => deleteConfirm());
+        projetDelete.onclick = (id) => deleteConfirm(id);
 
-        // ** Fonction de confirmation de suppression d'un projet ** //
+        // Suppression de tous les projets :
+        const allWorks = works.map(function (work) {
+          return work.id;
+        });
+        deleteallphotos.onclick = (id) => {
+          console.log(allWorks);
+          // deleteConfirm(works);
+          deleteConfirm(allWorks);
+        };
+
+        // ** Fonction de confirmation de suppression ** //
 
         function deleteConfirm(id) {
           // on affiche la fenêtre de confirmation :
           confirmationwindow.style.display = "flex";
-          // on récupère le nom du projet :
-          projetasupprimer.innerText = `${works[i].title}`;
-          // on récupère l'image & ses attibuts :
-          imageprojetasupprimer.src = works[i].imageUrl;
-          imageprojetasupprimer.alt = works[i].title;
-          imageprojetasupprimer.title = works[i].title;
-          imageprojetasupprimer.width = 150;
-          imageprojetasupprimer.style.margin = "0 auto";
+
+          // Si on clique sur "Supprimer la galerie" :
+          // (si la valeur est un tableau[de tous les projets])
+          if (Array.isArray(id)) {
+            // on affiche "tous les projets vont être supprimés !"
+            projetasupprimer.innerText = `!! TOUS LES PROJETS !!`;
+            imageprojetasupprimer.src = "";
+            imageprojetasupprimer.alt = "";
+            imageprojetasupprimer.title = "";
+            imageprojetasupprimer.width = "";
+            // sinon ..
+          } else {
+            // on récupère le nom du projet :
+            projetasupprimer.innerText = `${works[i].title}`;
+            // on récupère l'image & ses attibuts :
+            imageprojetasupprimer.src = works[i].imageUrl;
+            imageprojetasupprimer.alt = works[i].title;
+            imageprojetasupprimer.title = works[i].title;
+            imageprojetasupprimer.width = 150;
+            imageprojetasupprimer.style.margin = "0 auto";
+          }
 
           // évènement au click sur "Supprimer" :
-          confirmersuppression.addEventListener("click", () => {
-            console.log("click supprimer");
-            deleteWork(works[i].id);
-            confirmationwindow.style.display = "none";
+          confirmersuppression.onclick = () => {
+            console.log("supprimer n°" + works[i].id);
+            // deleteWork(works[i].id);
             getWorksInModal();
-          });
+            confirmationwindow.style.display = "none";
+          };
 
           // évènement au click sur "Annuler" :
-          annulersuppression.addEventListener("click", () => {
-            console.log("click annuler");
+          annulersuppression.onclick = () => {
+            console.log("annuler supprimer n°" + works[i].id);
             confirmationwindow.style.display = "none";
-          });
+          };
         }
       }
     })
     .catch((error) => console.log(`L'API Works n'a pas répondue : ${error}`));
 }
 
-// --------------------------------------------------------
+// Fonction de suppression de projet(s) :
 
 function deleteWork(id) {
   fetch(`http://localhost:5678/api/works/${id}`, {
@@ -246,8 +268,6 @@ function deleteWork(id) {
     },
   });
 }
-
-// --------------------------------------------------------
 
 //** ----- Lancement de la page d'accueil ----- **/
 
