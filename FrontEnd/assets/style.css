@@ -164,13 +164,20 @@ input {
 }
 
 :root {
+  --backgroung-blue-light: #e8f1f6;
   --backgroung-color-light: #fffef8;
   --middle-green: #1d6154;
   --dark-green: #0e2f28;
 
+  --normal-grey: #444444;
+  --light-grey: #cbd6dc;
+  --invalid-btn-grey: #a7a7a7;
+
   --error: #be2d25;
   --error-light: #d8817c;
   --error-dark: #851f1a;
+
+  --blue-button: #306685;
 }
 /** end reset css**/
 
@@ -489,7 +496,7 @@ body {
   background: rgba(255, 255, 255, 0.5);
 }
 
-#addphotowindowwrapper {
+.addphoto-window-wrapper {
   /* position: absolute; */
   border: 1px solid grey;
   background-color: var(--backgroung-color-light);
@@ -501,62 +508,119 @@ body {
   max-height: calc(100vw - 2rem);
   width: 630px;
   padding: 1rem;
-
-  /* margin: auto; */
 }
-#addphotowindowwrapper > * {
+.addphoto-window-wrapper > * {
   text-align: center;
 }
-#addphotowindowwrapper .wrappernav {
+.addphoto-window-wrapper .wrappernav {
   display: flex;
   align-items: center;
   justify-content: space-between;
   font-size: 1.2rem;
 }
-#addphotowindowwrapper .wrappernav i {
+.addphoto-window-wrapper .wrappernav i {
   cursor: pointer;
 }
-#addphotowindowwrapper h3 {
+.addphoto-window-wrapper h3 {
   font-size: 1.5rem;
   text-align: center;
   margin-top: 1rem;
   margin-bottom: 2rem;
 }
-#addphotowindowwrapper form {
-  /* border: 1px solid grey; */
+.addphoto-window-wrapper form {
   text-align: left;
-  /* margin-top: 30px; */
   display: flex;
   flex-direction: column;
   margin: 0rem 100px;
 }
-#addphotowindowwrapper label {
+
+.new-photo-container {
+  /* position: relative; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 170px;
+  background-color: var(--backgroung-blue-light);
+}
+
+.new-photo-container img {
+  display: none;
+}
+
+.new-photo-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.new-photo-menu i {
+  color: var(--light-grey);
+  font-size: 4rem;
+  margin: 0.4rem 0;
+}
+
+.new-photo-container .new-photo-menu label {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #cbd6dc;
+  color: var(--blue-button);
+  font-size: 0.9rem;
+  height: 36px;
+  width: 173px;
+  border-radius: 2rem;
+  margin: 0.5rem 0;
+}
+.new-photo-menu input {
+  display: none;
+}
+
+.new-photo-menu p {
+  color: var(--normal-grey);
+  font-size: 0.6rem;
+}
+
+.new-photo-preview {
+  position: absolute;
+  display: flex;
+  height: 170px;
+}
+
+.addphoto-window-wrapper label {
   margin: 2em 0 1em 0;
   font-size: 1rem;
 }
-#addphotowindowwrapper input {
+.addphoto-window-wrapper input {
   height: 50px;
   font-size: 1.2em;
   border: none;
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
   padding: 0 1rem;
 }
-#addphotowindowwrapper select {
+.addphoto-window-wrapper select {
   height: 50px;
   font-size: 1.2em;
   border: none;
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
   padding: 0 1rem;
 }
-#addphotowindowwrapper .separation-bar {
+.addphoto-window-wrapper .separation-bar {
   background-color: grey;
   opacity: 0.7;
   height: 1px;
   margin-top: 2.5rem;
 }
-#addphotowindowwrapper input[type="submit"] {
+.addphoto-window-wrapper input[type="submit"] {
+  background-color: var(--invalid-btn-grey);
   height: 36px;
   width: 237px;
+}
+.addphoto-window-wrapper input[type="submit"]:active {
+  background-color: var(--invalid-btn-grey);
 }
 
 /** ---------- fenêtre d'ajout de photo (fin)  -------- **/

@@ -56,6 +56,16 @@
         <!-- Formulaire d'envoi de photo -->
         <form id="addphotoform" class="addphotoform_group">
 
+          <div class="new-photo-container">
+            <div class="new-photo-menu">
+              <i class="fa-sharp fa-regular fa-image"></i>
+              <label for="addphoto">+ Ajouter photo</label>
+              <input type="file" id="addphoto" name="addphoto" accept="image/png, image/jpeg">
+              <p>jpg, png : 4mo max</p>
+            </div>
+            <img id="importedPhoto" src="./assets/images/appartement-paris-v.png" class="new-photo-preview"></img>
+          </div>
+
           <label for="photoname">Titre</label>
           <input type=text name="photoname" id="photoname">
 
