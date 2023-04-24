@@ -181,6 +181,10 @@ input {
 }
 /** end reset css**/
 
+i {
+  cursor: pointer;
+}
+
 /** Banniere + boutons mode edition start **/
 
 .edition {
