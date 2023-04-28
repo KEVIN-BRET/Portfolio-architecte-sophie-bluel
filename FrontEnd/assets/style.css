@@ -538,7 +538,41 @@ body {
   margin: 0rem 100px;
 }
 
-.new-photo-container {
+.addphotoform_group .photo-container {
+  /* border: 1px solid grey; */
+  height: 210px;
+}
+.addphotoform_group .title-container {
+  /* border: 1px solid grey; */
+  height: 125px;
+}
+.addphotoform_group .categorie-container {
+  /* border: 1px solid grey; */
+  height: 125px;
+}
+
+.addphotoform_group > div {
+  display: flex;
+  flex-direction: column;
+}
+.addphotoform_group span {
+  font-style: italic;
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  display: block;
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.3s;
+  color: red;
+}
+.error span {
+  visibility: visible;
+  opacity: 1;
+  color: red;
+}
+
+.addphoto {
   /* position: relative; */
   display: flex;
   flex-direction: column;
@@ -548,25 +582,48 @@ body {
   background-color: var(--backgroung-blue-light);
 }
 
-.new-photo-container img {
-  display: none;
+.addphoto {
+  /* display: none; */
+  position: relative;
 }
-
-.new-photo-menu {
+#addPhotoMenu {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 1rem;
 }
+#importedPhotoDisplay {
+  position: absolute;
+  visibility: visible;
+}
+#importedPhotoDisplay img {
+  display: flex;
+  height: 170px;
+}
+#importedPhotoDisplay i {
+  display: none;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  top: 0.2rem;
+  right: 0.2rem;
+  width: 1.3rem;
+  height: 1.3rem;
+  font-size: 1.5rem;
+  background-color: var(--backgroung-color-light);
+  opacity: 0.7;
+}
 
-.new-photo-menu i {
+
+.addphoto-menu i {
   color: var(--light-grey);
   font-size: 4rem;
   margin: 0.4rem 0;
 }
 
-.new-photo-container .new-photo-menu label {
+.addphoto .addphoto-menu label {
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -579,23 +636,19 @@ body {
   border-radius: 2rem;
   margin: 0.5rem 0;
 }
-.new-photo-menu input {
+.addphoto-menu input {
   display: none;
 }
 
-.new-photo-menu p {
+.addphoto-menu p {
   color: var(--normal-grey);
   font-size: 0.6rem;
 }
 
-.new-photo-preview {
-  position: absolute;
-  display: flex;
-  height: 170px;
-}
+
 
 .addphoto-window-wrapper label {
-  margin: 2em 0 1em 0;
+  margin-bottom: 1em;
   font-size: 1rem;
 }
 .addphoto-window-wrapper input {
