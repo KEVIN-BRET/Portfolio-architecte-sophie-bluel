@@ -209,6 +209,7 @@ function getWorksInModal() {
         // Fermeture de la modale d'ajout photo :
         closeAddPhotoWindow.onclick = () => {
           addPhotoWindow.style.display = "none";
+          closeAnyModale();
           getWorksInModal();
         };
         returnToGallery.onclick = () => {
@@ -274,18 +275,27 @@ function addPhotoModale() {
 
       // on pointe le <select> parent des <option value="categorie"> :
       const addPhotoCatergorie = document.getElementById("categorielist");
+      // on vide son contenu pour éviter les doublons à la réouverture :
+      addPhotoCatergorie.innerHTML = "";
 
-      // pour chaque catégorie :
+      // on créé le placeholder "choisissez une catégorie" :
+      const categoriePlaceHolder = document.createElement("option");
+      categoriePlaceHolder.innerText = "Choisissez une catégorie";
+      categoriePlaceHolder.value = "";
+      categoriePlaceHolder.setAttribute("disabled", "");
+      categoriePlaceHolder.setAttribute("selected", "");
+      addPhotoCatergorie.appendChild(categoriePlaceHolder);
+
+      // on injecte toutes les catégories :
       for (let i = 0; i < categories.length; i++) {
         // on récupère le nom & l'id :
         const nomCategorie = categories[i].name;
         const Categorie = categories[i].id;
         // on créé une balise <option> :
         const categorieOption = document.createElement("option");
-        categorieOption.innerText = nomCategorie;
 
+        categorieOption.innerText = nomCategorie;
         categorieOption.value = `${Categorie}`;
-        // categorieOption.dataset.photoCat = `${Categorie}`;
         addPhotoCatergorie.appendChild(categorieOption);
       }
     })
@@ -293,6 +303,17 @@ function addPhotoModale() {
       console.log(`L'API Categories n'a pas répondue : ${error}`);
       // filtreserror.innerText = "Impossible d'afficher les catégories !";
     });
+
+  //
+  let titleIsValid;
+  let imageIsValid;
+  let categoryIsValid;
+
+  if (titleIsValid === true) {
+    // changement de couleur du bouton envoyer :
+    const submitPhoto = document.getElementById("submitPhoto");
+    submitPhoto.style.backgroundColor = "var(--middle-green)";
+  }
 
   // Récupération de l'image pour l'apercu :
   function previewImage() {
@@ -304,12 +325,12 @@ function addPhotoModale() {
     const fileReader = new FileReader();
     fileReader.readAsDataURL(file);
     // quand le fichier est chargé, on affiche l'apercu :
-    fileReader.addEventListener("load", (e) => displayUploadImage(e, file));
+    fileReader.addEventListener("load", (e) => displayUploadImage(e));
     // console.log(this.files);
   }
 
   // Afichage de l'apercu de l'image :
-  function displayUploadImage(e, file) {
+  function displayUploadImage(e) {
     // on fait disparaitre les options de choix d'image :
     addPhotoMenu.style.display = "none";
     // on fait apparaitre l'immage ..
@@ -322,7 +343,7 @@ function addPhotoModale() {
     closeimportedPhoto.title = "Supprimer cette image";
     // si on clique sur close :
     closeimportedPhoto.addEventListener("click", (e) => {
-      // on vide la valeur de l'input 
+      // on vide la valeur de l'input
       addPhotoInput.value = "";
       // on fait disparaitre l'image et son bouton close
       importedPhoto.style.display = "none";
@@ -334,15 +355,13 @@ function addPhotoModale() {
 
   // on pointe l'input de la petite section d'ajout de photo :
   const addPhotoInput = document.querySelector('input[id="addphoto"]');
-  //
   addPhotoInput.addEventListener("change", previewImage);
-  //
-
   addPhotoInput.addEventListener("change", (e) => {
     //
     if (e.target.value.match(/\.(jpe?g|png)$/i)) {
       errorDisplay("photo", "");
       //
+      imageIsValid = true;
       //
     } else if (!e.target.value.match(/\.(jpe?g|png)$/i)) {
       errorDisplay("photo", "La photo doit être au format .jpg ou .png");
@@ -360,6 +379,8 @@ function addPhotoModale() {
       errorDisplay("title", "Le titre doit contenir entre 3 et 40 caractères");
     } else {
       errorDisplay("title", "");
+      //
+      titleIsValid = true;
     }
   });
 
@@ -369,13 +390,15 @@ function addPhotoModale() {
   selectCatInput.addEventListener("change", () => {
     if (selectCatInput.selectedIndex !== 0) {
       errorDisplay("categorie", "");
+      //
+      categoryIsValid = true;
     }
   });
 
   // on stock les valeur saisies dans des variables :
   let title, imageUrl, categoryId;
 
-  // au click sur le bouton Envoyer on lance la fonction de validationp :
+  // au click sur le bouton Envoyer on lance la fonction de validation :
   addPhotoForm.addEventListener("submit", (e) => {
     e.preventDefault();
     //
@@ -389,19 +412,28 @@ function addPhotoModale() {
       };
       //
       console.log(formData);
-      // inputs.forEach((input) => (input.value = ""));
+      // si l'image, titre et catégorie sont envoyé ..
+
+      // on fait disparaitre l'image et son bouton close
+      importedPhoto.style.display = "none";
+      closeimportedPhoto.style.display = "none";
+      // on fait ré-apparaitre les options de choix d'image :
+      addPhotoMenu.style.display = "flex";
+
+      // on vide les inputs :
       titlePhotoInput.value = "";
       addPhotoInput.value = "";
       selectCatInput.value = "";
 
-      //
+      // on vide les variable :
       title = null;
       imageUrl = null;
       categoryId = null;
+
       //
       alert("Photo envoyée !");
     } else {
-      alert("Veuillez renseigner tous les champs");
+      alert("Veuillez renseigner correctement tous les champs");
     }
 
     //
@@ -413,14 +445,20 @@ function addPhotoModale() {
     if (titlePhotoInput.value.length < 3 || titlePhotoInput.value.length > 40) {
       errorDisplay("title", "Le titre doit contenir entre 3 et 40 caractères");
       title = null;
-      //
-    } else if (selectCatInput.selectedIndex == 0) {
-      errorDisplay("categorie", "Veuillez séléctionner une catégorie");
+    } else if (selectCatInput.selectedIndex === 0) {
+      errorDisplay("categorie", "Vous devez choisir une catégorie");
       categoryId = null;
+    } else if (
+      !addPhotoInput.value ||
+      !addPhotoInput.value.match(/\.(jpe?g|png)$/i)
+    ) {
+      errorDisplay("photo", "Vous devez choisir une image");
+      imageUrl = null;
+      addPhotoInput.value = "";
     } else {
       // on retire la class .error et on dit valid=true
       errorDisplay("title", "", true);
-      // passe la valeur des inputs (validés) à leur variable :
+      // on passe la valeur des inputs (validés) à leur variable :
       title = titlePhotoInput.value;
       imageUrl = addPhotoInput.value;
       categoryId = selectCatInput.value;
