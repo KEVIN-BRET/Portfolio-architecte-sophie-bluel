@@ -209,7 +209,6 @@ function getWorksInModal() {
         // Fermeture de la modale d'ajout photo :
         closeAddPhotoWindow.onclick = () => {
           addPhotoWindow.style.display = "none";
-          closeAnyModale();
           getWorksInModal();
         };
         returnToGallery.onclick = () => {
@@ -267,6 +266,23 @@ function addPhotoModale() {
   // on pointe le formulaire :
   const addPhotoForm = document.getElementById("addphotoform");
 
+  // pour contenir l'état de validation de chaque inputs :
+  let titleIsValid = false;
+  let imageIsValid = false;
+  let categoryIsValid = false;
+
+  // changement de couleur du bouton envoyer :
+  function readyToUpload() {
+    const submitPhoto = document.getElementById("submitPhoto");
+    //
+    if ((titleIsValid && categoryIsValid && imageIsValid) === true) {
+      submitPhoto.style.backgroundColor = "var(--middle-green)";
+      console.log("photo ok");
+    } else {
+      submitPhoto.style.backgroundColor = "var(--invalid-btn-grey)";
+    }
+  }
+
   // injection des catégories dans le formulaire :
   fetch("http://localhost:5678/api/categories")
     .then((response) => response.json())
@@ -304,29 +320,13 @@ function addPhotoModale() {
       // filtreserror.innerText = "Impossible d'afficher les catégories !";
     });
 
-  //
-  let titleIsValid;
-  let imageIsValid;
-  let categoryIsValid;
-
-  if (titleIsValid === true) {
-    // changement de couleur du bouton envoyer :
-    const submitPhoto = document.getElementById("submitPhoto");
-    submitPhoto.style.backgroundColor = "var(--middle-green)";
-  }
-
   // Récupération de l'image pour l'apercu :
-  function previewImage() {
-    if (this.files.length === 0) {
-      return;
-    }
-    // on la garde dans une variable :
-    const file = this.files[0];
+  function previewImage(e) {
+    const file = e.target.files[0];
     const fileReader = new FileReader();
     fileReader.readAsDataURL(file);
     // quand le fichier est chargé, on affiche l'apercu :
     fileReader.addEventListener("load", (e) => displayUploadImage(e));
-    // console.log(this.files);
   }
 
   // Afichage de l'apercu de l'image :
@@ -345,6 +345,8 @@ function addPhotoModale() {
     closeimportedPhoto.addEventListener("click", (e) => {
       // on vide la valeur de l'input
       addPhotoInput.value = "";
+      imageIsValid = false;
+      readyToUpload();
       // on fait disparaitre l'image et son bouton close
       importedPhoto.style.display = "none";
       closeimportedPhoto.style.display = "none";
@@ -353,45 +355,63 @@ function addPhotoModale() {
     });
   }
 
-  // on pointe l'input de la petite section d'ajout de photo :
+  // on pointe et valide l'ajout de photo :
   const addPhotoInput = document.querySelector('input[id="addphoto"]');
-  addPhotoInput.addEventListener("change", previewImage);
+  // addPhotoInput.addEventListener("change", previewImage);
   addPhotoInput.addEventListener("change", (e) => {
-    //
-    if (e.target.value.match(/\.(jpe?g|png)$/i)) {
+    // if (e.target.length === 0) {
+    //   return;
+    // } else
+    if (!e.target.value.match(/\.(jpe?g|png)$/i)) {
+      errorDisplay("photo", "L'image doit être au format .jpg ou .png");
+      imageIsValid = false;
+      readyToUpload();
+      console.log("mauvais format !!!");
+    } else if (e.target.files[0].size > 4 * 1024 * 1024) {
+      errorDisplay("photo", "L'image ne doit pas dépasser 4 Mo");
+      imageIsValid = false;
+      readyToUpload();
+      console.log("trop grande !!!");
+    } else {
       errorDisplay("photo", "");
-      //
       imageIsValid = true;
-      //
-    } else if (!e.target.value.match(/\.(jpe?g|png)$/i)) {
-      errorDisplay("photo", "La photo doit être au format .jpg ou .png");
+      readyToUpload();
+      console.log("image valide ;)");
+      previewImage(e);
     }
   });
 
-  // on pointe l'input du titre de la photo :
+  // on pointe et valide le titre :
   const titlePhotoInput = document.querySelector('input[id="phototitle"]');
   // on affiche une erreur si la longueur n'est pas bonne :
   titlePhotoInput.addEventListener("input", (e) => {
     if (
-      e.target.value.length > 0 &&
-      (e.target.value.length < 3 || e.target.value.length > 20)
+      // e.target.value.length > 0 &&
+      e.target.value.length < 3 ||
+      e.target.value.length > 20
     ) {
       errorDisplay("title", "Le titre doit contenir entre 3 et 40 caractères");
+      titleIsValid = false;
+      readyToUpload();
     } else {
       errorDisplay("title", "");
-      //
       titleIsValid = true;
+      readyToUpload();
     }
   });
 
-  // on pointe la liste de catégories :
+  // on pointe et valide la liste de catégories :
   const selectCatInput = document.querySelector('select[id="categorielist"]');
   // on affiche une erreur si aucune n'est sélectionnée :
   selectCatInput.addEventListener("change", () => {
     if (selectCatInput.selectedIndex !== 0) {
       errorDisplay("categorie", "");
-      //
       categoryIsValid = true;
+      readyToUpload();
+    } else {
+      errorDisplay("categorie", "Vous devez choisir une catégorie");
+      categoryIsValid = false;
+      readyToUpload();
     }
   });
 
@@ -431,9 +451,9 @@ function addPhotoModale() {
       categoryId = null;
 
       //
-      alert("Photo envoyée !");
+      console.log("Photo envoyée !");
     } else {
-      alert("Veuillez renseigner correctement tous les champs");
+      console.log("Veuillez renseigner tous les champs");
     }
 
     //
