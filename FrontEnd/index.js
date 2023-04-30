@@ -133,6 +133,7 @@ galleryedition.addEventListener("click", (e) => {
 // la modale se ferme au click sur le bouton fermer (x) :
 closemodale.addEventListener("click", (e) => {
   modale1.style.display = "none";
+  getWorks();
 });
 // ou en appuyant sur Esc, on ferme la modale
 window.addEventListener("keydown", (e) => {
@@ -273,12 +274,14 @@ function addPhotoModale() {
 
   // changement de couleur du bouton envoyer :
   function readyToUpload() {
+    // on pointe le bouton submit :
     const submitPhoto = document.getElementById("submitPhoto");
-    //
+    // si tous les inputs sont validé "true"
     if ((titleIsValid && categoryIsValid && imageIsValid) === true) {
+      // le bouton devient vert :
       submitPhoto.style.backgroundColor = "var(--middle-green)";
-      console.log("photo ok");
     } else {
+      // sinon il est gris :
       submitPhoto.style.backgroundColor = "var(--invalid-btn-grey)";
     }
   }
@@ -359,9 +362,6 @@ function addPhotoModale() {
   const addPhotoInput = document.querySelector('input[id="addphoto"]');
   // addPhotoInput.addEventListener("change", previewImage);
   addPhotoInput.addEventListener("change", (e) => {
-    // if (e.target.length === 0) {
-    //   return;
-    // } else
     if (!e.target.value.match(/\.(jpe?g|png)$/i)) {
       errorDisplay("photo", "L'image doit être au format .jpg ou .png");
       imageIsValid = false;
@@ -376,7 +376,7 @@ function addPhotoModale() {
       errorDisplay("photo", "");
       imageIsValid = true;
       readyToUpload();
-      console.log("image valide ;)");
+      // console.log("image valide !");
       previewImage(e);
     }
   });
@@ -388,7 +388,7 @@ function addPhotoModale() {
     if (
       // e.target.value.length > 0 &&
       e.target.value.length < 3 ||
-      e.target.value.length > 20
+      e.target.value.length > 40
     ) {
       errorDisplay("title", "Le titre doit contenir entre 3 et 40 caractères");
       titleIsValid = false;
@@ -415,43 +415,50 @@ function addPhotoModale() {
     }
   });
 
-  // on stock les valeur saisies dans des variables :
-  let title, imageUrl, categoryId;
+  // on stock les valeures des inputs dans des variables :
+  let title, image, category;
 
   // au click sur le bouton Envoyer on lance la fonction de validation :
   addPhotoForm.addEventListener("submit", (e) => {
     e.preventDefault();
     //
     inputsChecker();
-    //
-    if (title && imageUrl && categoryId) {
-      const formData = {
-        title,
-        imageUrl,
-        categoryId,
-      };
-      //
-      console.log(formData);
-      // si l'image, titre et catégorie sont envoyé ..
+    // si tout les inputs sont validé (="true") :
+    if (title && image && category) {
+      // on passe leur valeur dans l'objet formData :
+      const formData = new FormData();
+      formData.append("title", title);
+      formData.append("image", image);
+      formData.append("category", category);
 
-      // on fait disparaitre l'image et son bouton close
+      // on envoi la requete POST :
+      fetch("http://localhost:5678/api/works", {
+        method: "POST",
+        body: formData,
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${localStorage.SophieBluelToken}`,
+        },
+      })
+        .then(() => alert("Le projet a bien été envoyé !"))
+        .catch((error) => alert(`Le projet n'a pas pu être envoyé : ${error}`));
+
+      // une fois que l'image a bien été posté,
+      // on fait disparaitre l'aperçu de l'image :
       importedPhoto.style.display = "none";
       closeimportedPhoto.style.display = "none";
       // on fait ré-apparaitre les options de choix d'image :
       addPhotoMenu.style.display = "flex";
-
       // on vide les inputs :
       titlePhotoInput.value = "";
       addPhotoInput.value = "";
       selectCatInput.value = "";
-
       // on vide les variable :
       title = null;
-      imageUrl = null;
-      categoryId = null;
-
-      //
-      console.log("Photo envoyée !");
+      image = null;
+      category = null;
+      // le bouton submit redevient gris :
+      submitPhoto.style.backgroundColor = "var(--invalid-btn-grey)";
     } else {
       console.log("Veuillez renseigner tous les champs");
     }
@@ -465,23 +472,30 @@ function addPhotoModale() {
     if (titlePhotoInput.value.length < 3 || titlePhotoInput.value.length > 40) {
       errorDisplay("title", "Le titre doit contenir entre 3 et 40 caractères");
       title = null;
+      // on teste la catégoprie :
     } else if (selectCatInput.selectedIndex === 0) {
       errorDisplay("categorie", "Vous devez choisir une catégorie");
-      categoryId = null;
+      category = null;
     } else if (
+      // on verifie qu'une image jpeg ou png est présente :
       !addPhotoInput.value ||
       !addPhotoInput.value.match(/\.(jpe?g|png)$/i)
     ) {
       errorDisplay("photo", "Vous devez choisir une image");
-      imageUrl = null;
+      image = null;
       addPhotoInput.value = "";
     } else {
       // on retire la class .error et on dit valid=true
       errorDisplay("title", "", true);
+      errorDisplay("photo", "", true);
+      errorDisplay("categorie", "", true);
+
       // on passe la valeur des inputs (validés) à leur variable :
       title = titlePhotoInput.value;
-      imageUrl = addPhotoInput.value;
-      categoryId = selectCatInput.value;
+      category = selectCatInput.value;
+      image = addPhotoInput.files[0];
+      // l'image doit etre un objet et non une url !
+      // image = addPhotoInput.value;
     }
   }
 }
