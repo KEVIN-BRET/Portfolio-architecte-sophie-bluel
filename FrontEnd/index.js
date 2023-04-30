@@ -391,7 +391,7 @@ function addPhotoModale() {
   // on affiche une erreur si la longueur n'est pas bonne :
   titlePhotoInput.addEventListener("input", (e) => {
     if (
-      e.target.value.length > 0 &&
+      e.target.value.length == 0 ||
       e.target.value.length < 3 ||
       e.target.value.length > 40
     ) {

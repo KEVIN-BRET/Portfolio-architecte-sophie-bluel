@@ -280,6 +280,10 @@ body {
 
 /** ------------------------ MODALE (debut) ------------------------ **/
 
+#modale1 {
+  display: none;
+}
+
 .modale {
   display: none;
   position: fixed;
@@ -333,7 +337,6 @@ body {
   gap: 0.5rem;
   overflow: auto;
 }
-
 
 /** ----- GALLERIE MODALE (debut) ----- **/
 
@@ -832,6 +835,7 @@ li a:hover {
 .gallery figure {
   display: flex;
   flex-direction: column;
+  gap: 0.3rem;
 }
 
 .gallery img {
@@ -839,6 +843,7 @@ li a:hover {
   height: 100%;
   object-fit: cover;
 }
+
 #contact {
   width: 50%;
   margin: auto;
