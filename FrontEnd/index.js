@@ -391,11 +391,12 @@ function addPhotoModale() {
   // on affiche une erreur si la longueur n'est pas bonne :
   titlePhotoInput.addEventListener("input", (e) => {
     if (
-      // e.target.value.length > 0 &&
+      e.target.value.length > 0 &&
       e.target.value.length < 3 ||
       e.target.value.length > 40
     ) {
       errorDisplay("title", "Le titre doit contenir entre 3 et 40 caractères");
+      console.log("erreur provenant de addEventListener()");
       titleIsValid = false;
       readyToUpload();
     } else {
@@ -475,6 +476,7 @@ function addPhotoModale() {
     // on teste le titre :
     if (titlePhotoInput.value.length < 3 || titlePhotoInput.value.length > 40) {
       errorDisplay("title", "Le titre doit contenir entre 3 et 40 caractères");
+      // console.log("erreur provenant de inputsChecker()");
       title = null;
       // on teste la catégoprie :
     } else if (selectCatInput.selectedIndex === 0) {
