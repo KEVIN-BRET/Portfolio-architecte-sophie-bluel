@@ -129,7 +129,6 @@ galleryedition.addEventListener("click", (e) => {
   modale1.style.display = "flex";
   getWorksInModal();
 });
-
 // la modale se ferme au click sur le bouton fermer (x) :
 closemodale.addEventListener("click", (e) => {
   modale1.style.display = "none";
@@ -139,6 +138,7 @@ closemodale.addEventListener("click", (e) => {
 window.addEventListener("keydown", (e) => {
   if (e.key === "Escape" || e.key === "Esc") {
     modale1.style.display = "none";
+    getWorks();
   }
 });
 // ou en cliaquant à coté de la modale :
@@ -146,11 +146,13 @@ window.addEventListener("click", (e) => {
   // console.log(e);
   if (e.target == modale1) {
     modale1.style.display = "none";
+    getWorks();
   }
 });
 
 //** ----- affichage des projets dans la modale ----- **//
 
+// affichage des projets dans la modale :
 function getWorksInModal() {
   fetch("http://localhost:5678/api/works")
     .then((response) => response.json())
@@ -271,6 +273,9 @@ function addPhotoModale() {
   let titleIsValid = false;
   let imageIsValid = false;
   let categoryIsValid = false;
+
+  //  une fois validés, on stock la valeur des inputs :
+  let title, image, category;
 
   // changement de couleur du bouton envoyer :
   function readyToUpload() {
@@ -415,13 +420,11 @@ function addPhotoModale() {
     }
   });
 
-  // on stock les valeures des inputs dans des variables :
-  let title, image, category;
-
-  // au click sur le bouton Envoyer on lance la fonction de validation :
+  // Envoi du formulaire :
   addPhotoForm.addEventListener("submit", (e) => {
+    // On evite le rechargement de la page :
     e.preventDefault();
-    //
+    // On valide les inputs :
     inputsChecker();
     // si tout les inputs sont validé (="true") :
     if (title && image && category) {
@@ -440,7 +443,9 @@ function addPhotoModale() {
           Authorization: `Bearer ${localStorage.SophieBluelToken}`,
         },
       })
+        // on affiche un msg de confirmation si l'envoi à fonctionné :
         .then(() => alert("Le projet a bien été envoyé !"))
+        // sinon on affiche un msg d'erreur :
         .catch((error) => alert(`Le projet n'a pas pu être envoyé : ${error}`));
 
       // une fois que l'image a bien été posté,
@@ -460,10 +465,9 @@ function addPhotoModale() {
       // le bouton submit redevient gris :
       submitPhoto.style.backgroundColor = "var(--invalid-btn-grey)";
     } else {
+      // si les champs sont mal renseignés on affiche un msg d'erreur :
       console.log("Veuillez renseigner tous les champs");
     }
-
-    //
   });
 
   // Validation des inputs :
@@ -489,12 +493,12 @@ function addPhotoModale() {
       errorDisplay("title", "", true);
       errorDisplay("photo", "", true);
       errorDisplay("categorie", "", true);
-
       // on passe la valeur des inputs (validés) à leur variable :
       title = titlePhotoInput.value;
       category = selectCatInput.value;
       image = addPhotoInput.files[0];
       // l'image doit etre un objet et non une url !
+      // (note pour moi-même ..)
       // image = addPhotoInput.value;
     }
   }
