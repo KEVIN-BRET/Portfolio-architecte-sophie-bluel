@@ -19,14 +19,19 @@
 <body>
   <!-- MODALE -->
   <aside id="modale1" class="modale" role="dialog" aria-labelledby="titlemodale">
-    <!-- Fenêtre principale de la modale -->
+
+    <!-- Fenêtre principale de la modale (gallerie) -->
     <div id="modalewrapper" class="modale-wrapper">
       <a href="#" id="closemodale"><i class="fa-solid fa-xmark"></i></a>
       <h3 id="titlemodale">Gallerie photo</h3>
-      <div id="modalegalery" class="modale-gallery-container"></div>
-      <div class="separation-bar"></div>
-      <button id="addPhotoBtn" class="btn-fixed">Ajouter une photo </button>
-      <a href="#" id="deleteallphotos">Supprimer la galerie</a>
+
+      <div class="modale-content-container">
+        <div id="modalegalery" class="modale-gallery-container"></div>
+        <div class="separation-bar"></div>
+        <button id="addPhotoBtn" class="btn-fixed">Ajouter une photo </button>
+        <a href="#" id="deleteallphotos">Supprimer la galerie</a>
+      </div>
+
     </div>
 
     <!-- Fenêtre de confrimation de suppression -->
@@ -39,15 +44,13 @@
           <button id="annulersuppression" class="bouton-confirmation">Annuler</button>
           <button id="confirmersuppression" class="bouton-confirmation">Supprimer</button>
         </div>
-
       </div>
-
-
     </aside>
 
     <!-- Fenêtre d'ajout de photo -->
     <aside id="addPhotoWindow" class="addphoto-window" role="dialog" aria-labelledby="addphototitle">
       <div id="addphotowindowwrapper" class="addphoto-window-wrapper">
+
         <div class="wrappernav">
           <i id="returnToGallery" class="fa-solid fa-arrow-left"></i>
           <i id="closeAddPhotoWindow" class="fa-solid fa-xmark"></i>
@@ -57,38 +60,40 @@
         <!-- Formulaire d'envoi de photo -->
         <form id="addphotoform" class="addphotoform_group" method="post" enctype="multipart/form-data">
 
-          <div class="photo-container">
-            <div class="addphoto">
-              <div id="addPhotoMenu" class="addphoto-menu">
-                <i class="fa-sharp fa-regular fa-image"></i>
-                <label for="addphoto">+ Ajouter photo</label>
-                <input type="file" id="addphoto" name="addphoto" accept="image/png, image/jpeg">
-                <p>jpg, png : 4mo max</p>
+          <div class="inputs-container">
+            <div class="photo-container">
+              <div class="addphoto">
+                <div id="addPhotoMenu" class="addphoto-menu">
+                  <i class="fa-sharp fa-regular fa-image"></i>
+                  <label for="addphoto">+ Ajouter photo</label>
+                  <input type="file" id="addphoto" name="addphoto" accept="image/png, image/jpeg">
+                  <p>jpg, png : 4mo max</p>
+                </div>
+
+                <div id="importedPhotoDisplay" class="importedPhotoDisplay">
+                  <img id="importedPhoto" class="importedPhoto" src=""></img>
+                  <i id="closeimportedPhoto" class="fa-solid fa-xmark"></i>
+
+                </div>
+
               </div>
-
-              <div id="importedPhotoDisplay" class="importedPhotoDisplay">
-                <img id="importedPhoto" class="importedPhoto" src=""></img>
-                <i id="closeimportedPhoto" class="fa-solid fa-xmark"></i>
-
-              </div>
-
+              <span>pas de photo</span>
             </div>
-            <span>pas de photo</span>
-          </div>
 
-          <div class="title-container">
-            <label for="phototitle">Titre</label>
-            <input type=text name="phototitle" id="phototitle">
-            <span></span>
-          </div>
+            <div class="title-container">
+              <label for="phototitle">Titre</label>
+              <input type=text name="phototitle" id="phototitle">
+              <span></span>
+            </div>
 
-          <div class="categorie-container">
-            <label for="categorielist">Catégorie</label>
-            <select name="categorielist" id="categorielist">
-              <!-- <option value="" disabled selected>Choisissez une catégorie</option> -->
+            <div class="categorie-container">
+              <label for="categorielist">Catégorie</label>
+              <select name="categorielist" id="categorielist">
+                <!-- <option value="" disabled selected>Choisissez une catégorie</option> -->
 
-            </select>
-            <span>pas de Catégorie</span>
+              </select>
+              <span>pas de Catégorie</span>
+            </div>
           </div>
 
           <div class="separation-bar"></div>
