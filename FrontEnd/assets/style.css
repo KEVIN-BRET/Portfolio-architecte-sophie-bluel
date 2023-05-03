@@ -304,7 +304,7 @@ body {
   width: 630px;
   max-width: calc(100vw - 2rem);
   min-height: 380px;
-  max-height: calc(100vh - 10rem);
+  max-height: calc(100vh - 8rem);
   padding: 1rem;
 }
 
@@ -333,7 +333,6 @@ body {
   display: flex;
   flex-direction: column;
   margin: 0 4.5rem;
-  /* overflow-x: hidden; */
   overflow: auto;
 }
 
@@ -341,8 +340,8 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   gap: 0.5rem;
-  /* overflow-x: hidden; */
-  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 /** ----- GALLERIE MODALE (debut) ----- **/
@@ -456,7 +455,6 @@ body {
   background: var(--backgroung-color-light);
   display: flex;
   flex-direction: column;
-  overflow: auto;
   border-radius: 0.4rem;
   max-width: calc(100vw - 2rem);
   max-height: calc(100vw - 2rem);
@@ -526,7 +524,7 @@ body {
   width: 630px;
   max-width: calc(100vw - 2rem);
   min-height: 380px;
-  max-height: calc(100vh - 10rem);
+  max-height: calc(100vh - 8rem);
   padding: 1rem;
 }
 /* .addphoto-window-wrapper > * {
@@ -884,7 +882,7 @@ input[type="submit"] {
   font-weight: 700;
   color: var(--backgroung-color-light);
   background-color: var(--middle-green);
-  margin: 2em auto;
+  margin: 1em auto;
   width: 180px;
   text-align: center;
   border-radius: 60px;
