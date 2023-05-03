@@ -1,50 +1,51 @@
-// on pointe la balise dans laquelle vont s'afficher les "filtres"
-const filtres = document.querySelector(".filtres");
-// on pointe la balise dans laquelle vont s'afficher les "projets"
-const gallery = document.querySelector(".gallery");
+// // on pointe la balise dans laquelle vont s'afficher les "filtres"
+// const filtres = document.querySelector(".filtres");
+// // on pointe la balise dans laquelle vont s'afficher les "projets"
+// const gallery = document.querySelector(".gallery");
+
 // on pointe le formulaire d'ajout de photo :
 const addPhotoForm = document.getElementById("addphotoform");
 
-let works;
-let categories;
+// let works;
+// let categories;
 
-// récupération des projets avec l'Api/works/
-function getWorks(categoryId) {
-  fetch("http://localhost:5678/api/works")
-    .then((response) => response.json())
-    .then((data) => {
-      works = data;
+// // récupération des projets avec l'Api/works/
+// function getWorks(categoryId) {
+//   fetch("http://localhost:5678/api/works")
+//     .then((response) => response.json())
+//     .then((data) => {
+//       works = data;
 
-      // Si un categoryId est fourni, on filtre les éléments
-      if (categoryId) {
-        works = works.filter((work) => work.categoryId === categoryId);
-      }
-      // on efface les élément présent dans la gallery
-      gallery.innerHTML = "";
+//       // Si un categoryId est fourni, on filtre les éléments
+//       if (categoryId) {
+//         works = works.filter((work) => work.categoryId === categoryId);
+//       }
+//       // on efface les élément présent dans la gallery
+//       gallery.innerHTML = "";
 
-      // on affiche chaque projets (filtrés ou non), avec une boucle for
-      for (let i = 0; i < works.length; i++) {
-        // chaque projet sera contenu dans une <figure> ..
-        const projetCard = document.createElement("figure");
-        projetCard.dataset.id = `categorie${works[i].categoryId}`;
-        gallery.appendChild(projetCard);
-        // qui contiendra une image ..
-        const projetImage = document.createElement("img");
-        projetImage.src = works[i].imageUrl;
-        projetImage.alt = works[i].title;
-        projetCard.appendChild(projetImage);
-        // .. et un sous titre
-        const projetSousTitre = document.createElement("figcaption");
-        projetSousTitre.innerText = works[i].title;
-        projetCard.appendChild(projetSousTitre);
-      }
-      //   console.log(works);
-    })
-    .catch((error) => {
-      console.log(`L'API Works n'a pas répondue : ${error}`);
-      galleryerror.innerText = "Impossible d'afficher les projets !";
-    });
-}
+//       // on affiche chaque projets (filtrés ou non), avec une boucle for
+//       for (let i = 0; i < works.length; i++) {
+//         // chaque projet sera contenu dans une <figure> ..
+//         const projetCard = document.createElement("figure");
+//         projetCard.dataset.id = `categorie${works[i].categoryId}`;
+//         gallery.appendChild(projetCard);
+//         // qui contiendra une image ..
+//         const projetImage = document.createElement("img");
+//         projetImage.src = works[i].imageUrl;
+//         projetImage.alt = works[i].title;
+//         projetCard.appendChild(projetImage);
+//         // .. et un sous titre
+//         const projetSousTitre = document.createElement("figcaption");
+//         projetSousTitre.innerText = works[i].title;
+//         projetCard.appendChild(projetSousTitre);
+//       }
+//       //   console.log(works);
+//     })
+//     .catch((error) => {
+//       console.log(`L'API Works n'a pas répondue : ${error}`);
+//       galleryerror.innerText = "Impossible d'afficher les projets !";
+//     });
+// }
 
 // récupération des catégories avec l'Api/categories/
 function getCategories() {
@@ -103,13 +104,13 @@ function getCategories() {
 }
 //** ------------------------------------------------------------- */
 
-// fonction pour changer le style du bouton de filtre actif :
-function boutonFiltreActif(bouton) {
-  document.querySelectorAll(".btn-clicked").forEach((btn) => {
-    btn.classList.remove("btn-clicked");
-  });
-  bouton.classList.add("btn-clicked");
-}
+// // fonction pour changer le style du bouton de filtre actif :
+// function boutonFiltreActif(bouton) {
+//   document.querySelectorAll(".btn-clicked").forEach((btn) => {
+//     btn.classList.remove("btn-clicked");
+//   });
+//   bouton.classList.add("btn-clicked");
+// }
 
 //** ----- gestion du login / logout ----- //
 
